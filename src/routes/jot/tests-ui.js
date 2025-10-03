@@ -10,9 +10,17 @@ test('manifest', ({ page }) =>
 	expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/manifest.json')
 );
 
-test('textarea', ({ page }) =>
-	expect(page.locator('textarea')).toHaveAttribute('placeholder', 'what are you thinking?')
-);
+test.describe('placeholder', () => {
+
+	test('placeholder', ({ page }) =>
+		expect(page.locator('textarea')).toHaveAttribute('placeholder', 'what are you thinking?')
+	);
+
+	test('autofocus', ({ page }) =>
+		expect(page.locator('textarea')).toHaveAttribute('autofocus', '')
+	);
+
+})
 
 test('button', ({ page }) =>
 	expect(page.locator('button')).toHaveText('jot')
