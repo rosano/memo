@@ -1,4 +1,5 @@
 <script>
+import 'normalize.css';
 import { page } from '$app/state';
 let { children, data } = $props();
 </script>
