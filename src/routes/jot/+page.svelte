@@ -88,6 +88,7 @@ remoteStorage.todos.handle('change', (event) => {
 	--spacing: 10px;
 	--corner: 3px;
 	--cap: 600px;
+	--line-border: 1px solid #eee;
 }
 
 app {
@@ -96,19 +97,23 @@ app {
 
 	margin: auto;
 
-	footer {
-		--footer-border: 1px solid #eee;
+	jot-item {
+		display: block;
+		padding: var(--spacing);
+		border-bottom: var(--line-border);
+	}
 
+	footer {
 		width: calc(100% - var(--spacing) * 2);
 		max-width: var(--cap);
 		padding: var(--spacing);
-		border: var(--footer-border);
+		border: var(--line-border);
 		border-bottom: 0;
 		border-radius: var(--corner) var(--corner) 0 0;
 
 		@media (max-width: 450px) {
 			border: unset;
-			border-top: var(--footer-border);
+			border-top: var(--line-border);
 			border-radius: unset;
 		}
 
