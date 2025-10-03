@@ -12,6 +12,7 @@
 		"test:unit": "vitest"
 	},
 	"dependencies": {
+		"remotestoragejs": "^2.0.0-beta.8",
 		"svp": "rosano/svp"
 	}
 }

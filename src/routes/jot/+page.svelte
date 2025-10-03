@@ -1,21 +1,63 @@
 <script>
+import RemoteStorage from 'remotestoragejs';
+import todos from './remotestorage-module.js';
+
+// remoteStorage module
+const remoteStorage = new RemoteStorage({
+  modules: [todos],
+  changeEvents: { local: true, window: true, remote: true, conflict: true },
+});
+
+remoteStorage.access.claim('todos', 'rw');
+
+remoteStorage.todos.cacheTodos();
+
 const mod = {
 
 	description: '',
 
-	data: [],
+	_data: [],
+	data: (data) => mod._data = data,
 
+	add: (item) => mod.data(mod._data.concat(item)),
 
-	submit: (event) => {
-		mod.data.push({
+	remove: (item) => { mod.data(mod._data.filter(e => e.$id !== item.$id)) },
+	
+	// modify: (item) => { remoteStorage.todos.updateTodo(item.$id, Object.assign(item, { description: Math.random().toString() })) },
+	// delete: (item) => { remoteStorage.todos.removeTodo(item.$id) },
+
+	update: (item) => { mod.data(mod._data.map(e => e.$id === item.$id ? item : e)) },
+
+	submit: async (event) => {
+		await remoteStorage.todos.addTodo({
 			description: mod.description,
-			dateCreated: new Date(),
 		});
 
-		mod.description = ''
+		mod.description = '';
 	},
 
 };
+
+// remoteStorage events
+
+// remoteStorage.on('ready', () => {});
+
+remoteStorage.on('disconnected', () => mod.data([]));
+  
+remoteStorage.todos.handle('change', (event) => {
+  if (event.newValue && !event.oldValue) {
+    return mod.add(remoteStorage.todos.hydrate(event.relativePath, event.newValue));
+  }
+
+  if (!event.newValue && event.oldValue) {
+    return mod.remove(remoteStorage.todos.hydrate(event.relativePath, event.oldValue));
+  }
+
+  if (event.newValue && event.oldValue) {
+    return mod.update(remoteStorage.todos.hydrate(event.relativePath, event.newValue));
+  }
+});
+
 </script>
 
 <svelte:head>
@@ -28,7 +70,7 @@ const mod = {
 <app>
 
 <section>
-	{#each mod.data as item }
+	{#each mod._data as item }
 		<jot-item>{ item.description }</jot-item>
 	{/each}
 </section>
