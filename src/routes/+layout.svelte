@@ -5,6 +5,8 @@ let { children, data } = $props();
 
 <svelte:head>
 	<title>{ page.data.title }</title>
+
+	<meta name="viewport" content="{ page.data.viewport || 'width=device-width, initial-scale=1' }" />
 </svelte:head>
 
 <header>
