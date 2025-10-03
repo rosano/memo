@@ -2,6 +2,10 @@ import { expect, test } from '@playwright/test';
 
 test.beforeEach(({ page }) => page.goto('/'));
 
+test('title', async ({ page }) =>
+  expect(await page.title()).toEqual('memo')
+);
+
 test('navigation', ({ page }) =>
   expect(page.locator('nav a')).toHaveText([
     'home',
