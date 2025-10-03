@@ -12,11 +12,9 @@ export async function GET() {
       type: 'image/png',
       purpose: 'any maskable'
     }],
-	}),
-		{
-			headers: {
-				'Content-Type': 'application/json'
-			}
+	}), {
+		headers: {
+			'Content-Type': 'application/json'
 		}
-	);
+	});
 }
