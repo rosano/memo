@@ -86,7 +86,7 @@ onMount(() => {
 <footer>
 	<!-- svelte-ignore a11y_autofocus -->
 	<textarea autofocus placeholder="what are you thinking?" bind:value={ mod.description }></textarea>
-	<button on:click={ mod.submit }>jot</button>
+	<button class="jot-add" on:click={ mod.submit }>jot</button>
 </footer>
 
 </app>

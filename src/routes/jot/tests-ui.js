@@ -31,8 +31,8 @@ test.describe('placeholder', () => {
 
 })
 
-test('button', ({ page }) =>
-	expect(page.locator('button')).toHaveText('jot')
+test('button.jot-add', ({ page }) =>
+	expect(page.locator('button.jot-add')).toHaveText('jot')
 );
 
 test('jot-item', ({ page }) => 
@@ -42,7 +42,7 @@ test('jot-item', ({ page }) =>
 test('create jot-item', async ({ page }) => {
 	const item = Math.random().toString();
 	await page.locator('textarea').fill(item);
-  await page.locator('button').click();
+  await page.locator('button.jot-add').click();
 
   await expect(page.locator('jot-item')).toHaveCount(1);
   await expect(page.locator('textarea')).toHaveText('');
