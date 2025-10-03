@@ -58,16 +58,24 @@ remoteStorage.todos.handle('change', (event) => {
   }
 });
 
+
+import { onMount } from 'svelte';
+
+onMount(() => {
+  (new window.Widget(remoteStorage)).attach('widget-wrapper');
+});
 </script>
 
 <svelte:head>
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 
-	<link rel="manifest" href="/manifest.json" />
+	<link rel="manifest" href="/manifest.json" /><script src="https://cdn.jsdelivr.net/npm/remotestorage-widget@latest/build/widget.js"></script>
 </svelte:head>
 
 <app>
+
+<div id="widget-wrapper"></div>
 
 <section>
 	{#each mod._data as item }
@@ -96,6 +104,10 @@ app {
 	max-width: var(--cap);
 
 	margin: auto;
+
+	#widget-wrapper :global(div) {
+		margin: auto;
+	}
 
 	jot-item {
 		display: block;
