@@ -10,6 +10,24 @@ test('manifest', ({ page }) =>
 	expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/manifest.json')
 );
 
-test('h1', ({ page }) =>
-	expect(page.locator('h1')).toHaveText('jot')
+test('textarea', ({ page }) =>
+	expect(page.locator('textarea')).toHaveAttribute('placeholder', 'what are you thinking?')
 );
+
+test('button', ({ page }) =>
+	expect(page.locator('button')).toHaveText('jot')
+);
+
+test('jot-item', ({ page }) => 
+	expect(page.locator('jot-item')).toHaveCount(0)
+);
+
+test('create jot-item', async ({ page }) => {
+	const item = Math.random().toString();
+	await page.locator('textarea').fill(item);
+  await page.locator('button').click();
+
+  await expect(page.locator('jot-item')).toHaveCount(1);
+  await expect(page.locator('textarea')).toHaveText('');
+  await expect(page.locator('jot-item')).toHaveText(item);
+});
