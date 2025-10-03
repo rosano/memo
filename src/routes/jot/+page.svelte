@@ -27,9 +27,11 @@ const mod = {
 
 <app>
 
-{#each mod.data as item }
-	<jot-item>{ item.description }</jot-item>
-{/each}
+<section>
+	{#each mod.data as item }
+		<jot-item>{ item.description }</jot-item>
+	{/each}
+</section>
 
 <footer>
 	<textarea autofocus placeholder="what are you thinking?" bind:value={ mod.description }></textarea>
@@ -46,38 +48,46 @@ const mod = {
 }
 
 app {
-	max-width: var(--cap);
 	display: block;
+	max-width: var(--cap);
 
 	margin: auto;
-}
 
-footer {
-	width: 100%;
-	max-width: var(--cap);
-	padding: var(--spacing);
-	border: 1px solid #eee;
-	border-radius: var(--corner);
-	border-bottom: 0;
+	footer {
+		--footer-border: 1px solid #eee;
 
-	position: absolute;
-	bottom: 0;
+		width: calc(100% - var(--spacing) * 2);
+		max-width: var(--cap);
+		padding: var(--spacing);
+		border: var(--footer-border);
+		border-bottom: 0;
+		border-radius: var(--corner) var(--corner) 0 0;
 
-	display: flex;
-
-	textarea {
-		border: 0;
-		resize: none;
-
-		flex-grow: 1;
-
-		&:focus {
-			outline: none !important;
+		@media (max-width: 450px) {
+			border: unset;
+			border-top: var(--footer-border);
+			border-radius: unset;
 		}
-	}
 
-	button {
-		padding: 0 var(--spacing);
+		position: absolute;
+		bottom: 0;
+
+		display: flex;
+
+		textarea {
+			border: 0;
+			resize: none;
+
+			flex-grow: 1;
+
+			&:focus {
+				outline: none !important;
+			}
+		}
+
+		button {
+			padding: 0 var(--spacing);
+		}
 	}
 }
 </style>
