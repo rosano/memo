@@ -1,12 +1,12 @@
 <script>
-let { children } = $props();
+let { children, data } = $props();
 </script>
 
 <header>
 	<nav>
-		<a href="/">home</a>
-		·
-		<a href="/jot">jot</a>
+		{#each data.navigation as section, index}
+			{#if index}&nbsp;·&nbsp;{/if}<a href="{section.path}">{section.title}</a>
+		{/each}
 	</nav>
 </header>
 
