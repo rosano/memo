@@ -19,6 +19,9 @@ const mod = {
 </script>
 
 <svelte:head>
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
 	<link rel="manifest" href="/manifest.json" />
 </svelte:head>
 

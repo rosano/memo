@@ -6,6 +6,15 @@ test('title', async ({ page }) =>
   expect(await page.title()).toEqual('jot')
 );
 
+test('viewport', ({ page }) =>
+	expect(page.locator('meta[name="viewport"]')).toHaveAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+);
+
+test('mobile-web-app-capable', async ({ page }) => {
+	await expect(page.locator('meta[name=mobile-web-app-capable]')).toHaveAttribute('content', 'yes');
+	await expect(page.locator('meta[name=apple-mobile-web-app-capable]')).toHaveAttribute('content', 'yes');
+});
+
 test('manifest', ({ page }) =>
 	expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/manifest.json')
 );
