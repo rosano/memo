@@ -112,7 +112,10 @@ app {
 	jot-item {
 		display: block;
 		padding: var(--spacing);
-		border-bottom: var(--line-border);
+
+		&:not(:nth-child(1)) {
+			border-top: var(--line-border);
+		}
 	}
 
 	footer {
