@@ -14,3 +14,57 @@ describe('formatPlaintext', () => {
 	});
 
 });
+
+describe('groupItems', () => {
+
+	function uItem (properties = {}) {
+		return Object.assign({
+			description: Math.random().toString(),
+			dateCreated: new Date(),
+		}, properties);
+	};
+	
+	it('groups by date', () => {
+		const items = [uItem(), uItem()];
+		expect(mod.groupItems(items)).toEqual([{
+			name: items[0].dateCreated.toJSON().slice(0, 10),
+			items,
+		}]);
+	});
+	
+	it('groups unknown', () => {
+		const items = [uItem({
+			dateCreated: undefined,
+		})];
+		expect(mod.groupItems(items)).toEqual([{
+			name: 'Other',
+			items,
+		}]);
+	});
+	
+	it('sorts newer dates lower', () => {
+		const items = [uItem({
+			dateCreated: new Date('2000-01-01'),
+		}), uItem()];
+		expect(mod.groupItems(items)).toEqual([{
+			name: items[1].dateCreated.toJSON().slice(0, 10),
+			items: [items[1]],
+		}, {
+			name: items[0].dateCreated.toJSON().slice(0, 10),
+			items: [items[0]],
+		}]);
+	});
+	
+	it('sorts items ascending', () => {
+		const items = [uItem({
+			dateCreated: new Date('2000-01-01 12:01'),
+		}), uItem({
+			dateCreated: new Date('2000-01-01 12:00'),
+		})];
+		expect(mod.groupItems(items)).toEqual([{
+			name: items[0].dateCreated.toJSON().slice(0, 10),
+			items: items.slice().reverse(),
+		}]);
+	});
+
+});
