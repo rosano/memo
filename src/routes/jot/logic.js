@@ -12,9 +12,17 @@ const mod = {
 		return input.replaceAll('\n', '<br>');
 	},
 
+	heading (input) {
+		if ((input instanceof Date) && !Number.isNaN(input.getTime())) {
+			return input.toJSON().slice(0, 10);
+		}
+		
+		throw new Error('expected date');
+	},
+
 	groupItems (input) {
 		return input.reduce((coll, item) => {
-			const name = item.dateCreated ? item.dateCreated.toJSON().slice(0, 10) : 'Other';
+			const name = item.dateCreated ? mod.heading(item.dateCreated) : 'Other';
 			const filter = e => e.name === name;
 
 			const group = coll.filter(filter).shift() || {

@@ -15,6 +15,19 @@ describe('formatPlaintext', () => {
 
 });
 
+describe('heading', () => {
+
+	it('throws if not valid', () => {
+		expect(() => mod.heading()).toThrowError('expected date');
+	});
+	
+	it('returns string', () => {
+		const item = new Date();
+		expect(mod.heading(item)).toBe(item.toJSON().slice(0, 10));
+	});
+
+});
+
 describe('groupItems', () => {
 
 	function uItem (properties = {}) {
@@ -27,7 +40,7 @@ describe('groupItems', () => {
 	it('groups by date', () => {
 		const items = [uItem(), uItem()];
 		expect(mod.groupItems(items)).toEqual([{
-			name: items[0].dateCreated.toJSON().slice(0, 10),
+			name: mod.heading(items[0].dateCreated),
 			items,
 		}]);
 	});
@@ -47,10 +60,10 @@ describe('groupItems', () => {
 			dateCreated: new Date('2000-01-01'),
 		}), uItem()];
 		expect(mod.groupItems(items)).toEqual([{
-			name: items[1].dateCreated.toJSON().slice(0, 10),
+			name: mod.heading(items[1].dateCreated),
 			items: [items[1]],
 		}, {
-			name: items[0].dateCreated.toJSON().slice(0, 10),
+			name: mod.heading(items[0].dateCreated),
 			items: [items[0]],
 		}]);
 	});
@@ -62,7 +75,7 @@ describe('groupItems', () => {
 			dateCreated: new Date('2000-01-01 12:00'),
 		})];
 		expect(mod.groupItems(items)).toEqual([{
-			name: items[0].dateCreated.toJSON().slice(0, 10),
+			name: mod.heading(items[0].dateCreated),
 			items: items.slice().reverse(),
 		}]);
 	});
