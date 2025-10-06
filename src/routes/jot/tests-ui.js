@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import mod from './logic.js';
 
 test.beforeEach(({ page }) => page.goto('/jot'));
 
@@ -39,13 +40,17 @@ test('jot-item', ({ page }) =>
 	expect(page.locator('section p')).toHaveCount(0)
 );
 
+test('headings', ({ page }) => 
+	expect(page.locator('section h1')).toHaveCount(0)
+);
+
 test('create jot-item', async ({ page }) => {
 	const item = Math.random().toString();
 	await page.locator('textarea').fill(item);
   await page.locator('button.jot-add').click();
 
-  await expect(page.locator('section p')).toHaveCount(1);
   await expect(page.locator('textarea')).toHaveText('');
+  await expect(page.locator('section h1')).toHaveText('#' + mod.heading(new Date()));
   await expect(page.locator('section p')).toHaveText(item);
 });
 

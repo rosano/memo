@@ -19,9 +19,10 @@ const mod = {
 	description: '',
 
 	_data: [],
-	data: (data) => mod._data = data,
+	_groups: [],
+	data: (data) => mod._groups = logic.groupItems(mod._data = data),
 
-	add: (item) => mod.data(mod._data.concat(item)),
+	add: (item) => { mod.data(mod._data.concat(item)) },
 
 	remove: (item) => { mod.data(mod._data.filter(e => e.$id !== item.$id)) },
 	
@@ -90,11 +91,15 @@ onMount(() => {
 <div id="widget-wrapper"></div>
 
 <section>
-	{#each mod._data as item, index }
-		{#if index }
-			<p>* * *</p>
-		{/if}
-		<p>{@html logic.formatPlaintext(item.description) }</p>
+	{#each mod._groups as group }
+		<h1># { group.name }</h1>
+
+		{#each group.items as item, index }
+			{#if index }
+				<p class="hr">* * *</p>
+			{/if}
+			<p>{@html logic.formatPlaintext(item.description) }</p>
+		{/each}
 	{/each}
 </section>
 
@@ -124,10 +129,16 @@ app {
 		margin: auto;
 	}
 
+	section {
+		font-family: monospace;
+	}
+
 	p {
 		display: block;
 
-		font-family: monospace;
+		&.hr {
+			opacity: 0.2;
+		}
 	}
 
 	footer {
