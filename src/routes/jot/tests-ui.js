@@ -36,7 +36,7 @@ test('button.jot-add', ({ page }) =>
 );
 
 test('jot-item', ({ page }) => 
-	expect(page.locator('jot-item')).toHaveCount(0)
+	expect(page.locator('section p')).toHaveCount(0)
 );
 
 test('create jot-item', async ({ page }) => {
@@ -44,9 +44,9 @@ test('create jot-item', async ({ page }) => {
 	await page.locator('textarea').fill(item);
   await page.locator('button.jot-add').click();
 
-  await expect(page.locator('jot-item')).toHaveCount(1);
+  await expect(page.locator('section p')).toHaveCount(1);
   await expect(page.locator('textarea')).toHaveText('');
-  await expect(page.locator('jot-item')).toHaveText(item);
+  await expect(page.locator('section p')).toHaveText(item);
 });
 
 test('create jot-item multiline', async ({ page }) => {
@@ -54,5 +54,5 @@ test('create jot-item multiline', async ({ page }) => {
 	await page.locator('textarea').fill(item);
   await page.locator('button.jot-add').click();
 
-  await expect(await page.locator('jot-item').innerHTML()).toEqual(expect.stringContaining(item.replace('\n', '<br>')));
+  await expect(await page.locator('section p').innerHTML()).toEqual(expect.stringContaining(item.replace('\n', '<br>')));
 });
