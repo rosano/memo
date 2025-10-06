@@ -62,7 +62,7 @@ test('create jot-item', async ({ page }) => {
   await page.locator('button.jot-add').click();
 
   await expect(page.locator('textarea')).toHaveText('');
-  await expect(page.locator('section h1')).toHaveText('#' + mod.heading(new Date()));
+  await expect(page.locator('section h1')).toHaveText('# ' + mod.heading(new Date()));
   await expect(page.locator('section p')).toHaveText(item);
 });
 
@@ -72,4 +72,24 @@ test('create jot-item multiline', async ({ page }) => {
   await page.locator('button.jot-add').click();
 
   await expect(await page.locator('section p').innerHTML()).toEqual(expect.stringContaining(item.replace('\n', '<br>')));
+});
+
+test.describe('shortcuts', () => {
+
+	[
+		'Control+Enter',
+		'Alt+Enter',
+		'Meta+Enter',
+	].forEach(shortcut =>
+
+		test.skip(shortcut, async ({ page }) => {
+			const item = Math.random().toString();
+			await page.locator('textarea').fill(item);
+			await page.getByRole('textbox').press(shortcut);
+
+		  await expect(page.locator('section p')).toHaveText(item);
+		})
+
+	);
+
 });

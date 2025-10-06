@@ -31,7 +31,7 @@ const mod = {
 
 	update: (item) => { mod.data(mod._data.map(e => e.$id === item.$id ? item : e)) },
 
-	submit: async (event) => {
+	submit: async () => {
 		await remoteStorage.todos.addTodo({
 			description: mod._description,
 		});
@@ -44,6 +44,13 @@ const mod = {
 	visibilitychange (event) {
 		if (event.target.visibilityState === 'visible' && mod._textarea) {
 			mod._textarea.focus();
+		}
+	},
+
+	keydown (event) {
+		if (event.key === 'Enter' && (event.altKey || event.ctrlKey || event.metaKey)) {
+			event.preventDefault();
+			mod.submit();
 		}
 	},
 
@@ -102,7 +109,7 @@ onMount(() => {
 
 <footer>
 	<!-- svelte-ignore a11y_autofocus -->
-	<textarea required autofocus placeholder="what are you thinking?" bind:value={ mod._description } bind:this={ mod._textarea }></textarea>
+	<textarea required autofocus placeholder="what are you thinking?" bind:value={ mod._description } bind:this={ mod._textarea } on:keydown={ mod.keydown }></textarea>
 	<button class="jot-add" on:click={ mod.submit } disabled={ mod._description.trim() === '' ? true : null }>jot</button>
 </footer>
 
@@ -133,9 +140,9 @@ app {
 	p {
 		display: block;
 
-		&.hr {
+		/*&.hr {
 			opacity: 0.2;
-		}
+		}*/
 	}
 
 	footer {
