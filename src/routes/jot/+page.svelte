@@ -1,5 +1,6 @@
 <script>
 import RemoteStorage from 'remotestoragejs';
+import Widget from 'remotestorage-widget';
 import todos from './remotestorage-module.js';
 
 // remoteStorage module
@@ -62,7 +63,7 @@ remoteStorage.todos.handle('change', (event) => {
 import { onMount } from 'svelte';
 
 onMount(() => {
-  (new window.Widget(remoteStorage)).attach('widget-wrapper');
+  (new Widget(remoteStorage)).attach('widget-wrapper');
 });
 </script>
 
@@ -71,7 +72,6 @@ onMount(() => {
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 
 	<link rel="manifest" href="/manifest.json" />
-	<script src="https://cdn.jsdelivr.net/npm/remotestorage-widget@latest/build/widget.js"></script>
 </svelte:head>
 
 <app>

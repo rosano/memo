@@ -12,8 +12,9 @@
 		"test:unit": "vitest"
 	},
 	"dependencies": {
-		"remotestoragejs": "^2.0.0-beta.8",
 		"@sveltejs/kit": "^2.22.0",
+		"remotestorage-widget": "rosano/remotestorage-widget",
+		"remotestoragejs": "^2.0.0-beta.8",
 		"svp": "rosano/svp"
 	}
 }
