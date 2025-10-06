@@ -28,7 +28,10 @@ export default {
     };
 
     const hydrate = function (path, object) {
-      return formatIn(object, { $id: path });
+      return formatIn(object, {
+        $id: path,
+        dateCreated: object.dateCreated ? new Date(object.dateCreated) : object.dateCreated,
+      });
     };
 
     return {
@@ -44,14 +47,10 @@ export default {
 
           return privateClient.storeObject('todo', $id, Object.assign(object, {
             dateCreated,
-          })).then(e => formatIn(object, {
-            $id,
-          }));
+          })).then(e => hydrate($id, object));
         },
 
-        updateTodo: ($id, object) => privateClient.storeObject('todo', $id, formatOut(object)).then(e => formatIn(object, {
-          $id,
-        })),
+        updateTodo: ($id, object) => privateClient.storeObject('todo', $id, formatOut(object)).then(e => hydrate($id, object)),
 
         removeTodo: privateClient.remove.bind(privateClient),
 
