@@ -37,6 +37,12 @@ const mod = {
 		mod.description = '';
 	},
 
+	visibilitychange (event) {
+		if (event.target.visibilityState === 'visible' && mod._textarea) {
+			mod._textarea.focus();
+		}
+	},
+
 };
 
 // remoteStorage events
@@ -67,6 +73,8 @@ onMount(() => {
 });
 </script>
 
+<svelte:document onvisibilitychange={ mod.visibilitychange } />
+
 <svelte:head>
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -86,7 +94,7 @@ onMount(() => {
 
 <footer>
 	<!-- svelte-ignore a11y_autofocus -->
-	<textarea autofocus placeholder="what are you thinking?" bind:value={ mod.description }></textarea>
+	<textarea autofocus placeholder="what are you thinking?" bind:value={ mod.description } bind:this={ mod._textarea }></textarea>
 	<button class="jot-add" on:click={ mod.submit }>jot</button>
 </footer>
 
