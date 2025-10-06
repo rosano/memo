@@ -35,6 +35,8 @@ const mod = {
 		});
 
 		mod.description = '';
+
+		mod._textarea.focus();
 	},
 
 	visibilitychange (event) {
