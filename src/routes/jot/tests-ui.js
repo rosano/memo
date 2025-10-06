@@ -48,3 +48,11 @@ test('create jot-item', async ({ page }) => {
   await expect(page.locator('textarea')).toHaveText('');
   await expect(page.locator('jot-item')).toHaveText(item);
 });
+
+test('create jot-item multiline', async ({ page }) => {
+	const item = [Math.random().toString(), Math.random().toString()].join('\n');
+	await page.locator('textarea').fill(item);
+  await page.locator('button.jot-add').click();
+
+  await expect(await page.locator('jot-item').innerHTML()).toEqual(expect.stringContaining(item.replace('\n', '<br>')));
+});

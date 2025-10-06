@@ -2,6 +2,7 @@
 import RemoteStorage from 'remotestoragejs';
 import Widget from 'remotestorage-widget';
 import todos from './remotestorage-module.js';
+import logic from './logic.js';
 
 // remoteStorage module
 const remoteStorage = new RemoteStorage({
@@ -90,7 +91,7 @@ onMount(() => {
 
 <section>
 	{#each mod._data as item }
-		<jot-item>{ item.description }</jot-item>
+		<jot-item>{@html logic.formatPlaintext(item.description) }</jot-item>
 	{/each}
 </section>
 
