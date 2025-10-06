@@ -1,5 +1,5 @@
 <script>
-import 'normalize.css';
+import 'normalize.css/normalize.css';
 import { dev } from '$app/environment';
 import { page } from '$app/state';
 let { children, data } = $props();
