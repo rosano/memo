@@ -1,7 +1,7 @@
 const mod = {
 
 	formatPlaintext (input) {
-		return input.replaceAll('\n', '<br>')
+		return input.replaceAll('\n', '<br>');
 	},
 
 };
