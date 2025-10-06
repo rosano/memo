@@ -30,11 +30,23 @@ test.describe('placeholder', () => {
 		expect(page.locator('textarea')).toHaveAttribute('autofocus', '')
 	);
 
-})
+	test('required', ({ page }) =>
+		expect(page.locator('textarea')).toHaveAttribute('required', '')
+	);
 
-test('button.jot-add', ({ page }) =>
-	expect(page.locator('button.jot-add')).toHaveText('jot')
-);
+});
+
+test.describe('button.jot-add', () => {
+
+	test('text', ({ page }) =>
+		expect(page.locator('button.jot-add')).toHaveText('jot')
+	);
+
+	test('disabled', ({ page }) =>
+		expect(page.locator('button.jot-add')).toHaveAttribute('disabled', '')
+	);
+	
+});
 
 test('jot-item', ({ page }) => 
 	expect(page.locator('section p')).toHaveCount(0)

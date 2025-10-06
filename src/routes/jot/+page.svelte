@@ -16,7 +16,7 @@ remoteStorage.todos.cacheTodos();
 
 const mod = {
 
-	description: '',
+	_description: '',
 
 	_data: [],
 	_groups: [],
@@ -33,10 +33,10 @@ const mod = {
 
 	submit: async (event) => {
 		await remoteStorage.todos.addTodo({
-			description: mod.description,
+			description: mod._description,
 		});
 
-		mod.description = '';
+		mod._description = '';
 
 		mod._textarea.focus();
 	},
@@ -95,9 +95,6 @@ onMount(() => {
 		<h1># { group.name }</h1>
 
 		{#each group.items as item, index }
-			{#if index }
-				<p class="hr">* * *</p>
-			{/if}
 			<p>{@html logic.formatPlaintext(item.description) }</p>
 		{/each}
 	{/each}
@@ -105,8 +102,8 @@ onMount(() => {
 
 <footer>
 	<!-- svelte-ignore a11y_autofocus -->
-	<textarea autofocus placeholder="what are you thinking?" bind:value={ mod.description } bind:this={ mod._textarea }></textarea>
-	<button class="jot-add" on:click={ mod.submit }>jot</button>
+	<textarea required autofocus placeholder="what are you thinking?" bind:value={ mod._description } bind:this={ mod._textarea }></textarea>
+	<button class="jot-add" on:click={ mod.submit } disabled={ mod._description.trim() === '' ? true : null }>jot</button>
 </footer>
 
 </app>
