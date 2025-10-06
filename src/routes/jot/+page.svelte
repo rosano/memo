@@ -163,6 +163,7 @@ app {
 		textarea {
 			border: 0;
 			resize: none;
+			height: 50px;
 
 			flex-grow: 1;
 
