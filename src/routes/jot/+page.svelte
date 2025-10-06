@@ -90,8 +90,11 @@ onMount(() => {
 <div id="widget-wrapper"></div>
 
 <section>
-	{#each mod._data as item }
-		<jot-item>{@html logic.formatPlaintext(item.description) }</jot-item>
+	{#each mod._data as item, index }
+		{#if index }
+			<p>* * *</p>
+		{/if}
+		<p>{@html logic.formatPlaintext(item.description) }</p>
 	{/each}
 </section>
 
@@ -121,13 +124,10 @@ app {
 		margin: auto;
 	}
 
-	jot-item {
+	p {
 		display: block;
-		padding: var(--spacing);
 
-		&:not(:nth-child(1)) {
-			border-top: var(--line-border);
-		}
+		font-family: monospace;
 	}
 
 	footer {
