@@ -70,7 +70,8 @@ onMount(() => {
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 
-	<link rel="manifest" href="/manifest.json" /><script src="https://cdn.jsdelivr.net/npm/remotestorage-widget@latest/build/widget.js"></script>
+	<link rel="manifest" href="/manifest.json" />
+	<script src="https://cdn.jsdelivr.net/npm/remotestorage-widget@latest/build/widget.js"></script>
 </svelte:head>
 
 <app>
