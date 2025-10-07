@@ -145,6 +145,9 @@ app {
 		padding: var(--spacing);
 
 		background: #f9f9f9;
+
+		/* wrap long urls  */
+		word-break: break-word;
 	}
 
 	p {
