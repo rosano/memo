@@ -124,18 +124,43 @@ onMount(() => {
 	--background: #eee;
 }
 
-:global(nav) {
-	padding: calc(var(--spacing) / 2);
+:global {
+
+	body {
+		height: 100dvh;
+
+		background: var(--background);
+	}
+
+	.sveltekit {
+		height: inherit;
+		display: flex !important;
+		flex-direction: column;
+
+		app {
+			flex-grow: 1;
+		}
+	}
+
+	nav {
+		padding: calc(var(--spacing) / 2);
+
+		text-align: center;
+	}
+
 }
 
 app {
-	display: block;
+	width: 100%;
 	max-width: var(--cap);
 
 	margin: auto;
 
 	background: var(--background);
 	font-family: monospace;
+
+	display: flex;
+	flex-direction: column;
 
 	#widget-wrapper :global(div) {
 		margin: auto;
@@ -146,8 +171,14 @@ app {
 
 		background: #f9f9f9;
 
+		flex-grow: 1;
+
 		/* wrap long urls  */
 		word-break: break-word;
+
+		@media (min-width: 450px) {
+			border-radius: var(--corner);
+		}
 	}
 
 	p {
@@ -162,15 +193,12 @@ app {
 		width: calc(100% - var(--spacing) * 2);
 		max-width: var(--cap);
 		padding: var(--spacing);
-		border: var(--line-border);
-		border-bottom: 0;
+		border-top: var(--line-border);
 		border-radius: var(--corner) var(--corner) 0 0;
 
 		background: #fdfdfd;
 
 		@media (max-width: 450px) {
-			border: unset;
-			border-top: var(--line-border);
 			border-radius: unset;
 		}
 
