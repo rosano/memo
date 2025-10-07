@@ -15,20 +15,16 @@ export default {
       return Object.assign(Object.assign({}, object), properties);
     };
 
-    const formatOut = function (object, properties) {
+    const dehydrate = function (object, properties) {
       delete object.$id;
 
       return inject(object, properties);
     };
 
-    const formatIn = function (object, properties) {
-      object.completed = !!object.completed;
-      
-      return inject(object, properties);
-    };
-
     const hydrate = function (path, object) {
-      return formatIn(object, {
+      object.completed = !!object.completed;
+
+      return inject(object, {
         $id: path,
         dateCreated: object.dateCreated ? new Date(object.dateCreated) : object.dateCreated,
       });
@@ -50,7 +46,7 @@ export default {
           })).then(e => hydrate($id, object));
         },
 
-        updateTodo: ($id, object) => privateClient.storeObject('todo', $id, formatOut(object)).then(e => hydrate($id, object)),
+        updateTodo: ($id, object) => privateClient.storeObject('todo', $id, dehydrate(object)).then(e => hydrate($id, object)),
 
         removeTodo: privateClient.remove.bind(privateClient),
 
