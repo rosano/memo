@@ -121,6 +121,7 @@ onMount(() => {
 	--corner: 3px;
 	--cap: 600px;
 	--line-border: 1px solid #eee;
+	--background: #eee;
 }
 
 app {
@@ -129,14 +130,17 @@ app {
 
 	margin: auto;
 
+	background: var(--background);
+	font-family: monospace;
+
 	#widget-wrapper :global(div) {
 		margin: auto;
 	}
 
 	section {
 		padding: var(--spacing);
-		
-		font-family: monospace;
+
+		background: #f9f9f9;
 	}
 
 	p {
@@ -154,6 +158,8 @@ app {
 		border: var(--line-border);
 		border-bottom: 0;
 		border-radius: var(--corner) var(--corner) 0 0;
+
+		background: #fdfdfd;
 
 		@media (max-width: 450px) {
 			border: unset;
@@ -179,7 +185,8 @@ app {
 		}
 
 		button {
-			padding: 0 var(--spacing);
+			padding: 0 calc(var(--spacing) * 1.5);
+			margin-left: var(--spacing);
 		}
 	}
 }
