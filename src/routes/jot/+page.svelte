@@ -175,11 +175,12 @@ app {
 		bottom: 0;
 
 		display: flex;
+		flex-direction: column;
 
 		textarea {
 			border: 0;
 			resize: none;
-			height: 50px;
+			height: 100px;
 
 			flex-grow: 1;
 
@@ -189,8 +190,8 @@ app {
 		}
 
 		button {
-			padding: 0 calc(var(--spacing) * 1.5);
-			margin-left: var(--spacing);
+			padding: calc(var(--spacing) * 1) 0;
+			margin-top: var(--spacing);
 		}
 	}
 }
