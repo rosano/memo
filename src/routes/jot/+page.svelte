@@ -134,6 +134,8 @@ app {
 	}
 
 	section {
+		padding: var(--spacing);
+		
 		font-family: monospace;
 	}
 
