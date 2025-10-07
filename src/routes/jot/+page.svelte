@@ -171,7 +171,7 @@ app {
 			border-radius: unset;
 		}
 
-		position: fixed;
+		position: sticky;
 		bottom: 0;
 
 		display: flex;
