@@ -124,6 +124,10 @@ onMount(() => {
 	--background: #eee;
 }
 
+:global(nav) {
+	padding: calc(var(--spacing) / 2);
+}
+
 app {
 	display: block;
 	max-width: var(--cap);
