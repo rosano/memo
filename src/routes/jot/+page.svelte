@@ -43,7 +43,7 @@ const mod = {
 
 	visibilitychange (event) {
 		if (event.target.visibilityState === 'visible' && mod._textarea) {
-			mod._textarea.focus();
+			setTimeout(() => mod._textarea.focus(), 100);
 		}
 	},
 
