@@ -11,20 +11,16 @@ export default {
       required: ['description'],
     });
 
-    const inject = function (object, properties) {
-      return Object.assign(Object.assign({}, object), properties);
-    };
-
-    const dehydrate = function (object, properties) {
+    const dehydrate = function (object) {
       delete object.$id;
 
-      return inject(object, properties);
+      return object;
     };
 
     const hydrate = function (path, object) {
       object.completed = !!object.completed;
 
-      return inject(object, {
+      return Object.assign(object, {
         $id: path,
         dateCreated: object.dateCreated ? new Date(object.dateCreated) : object.dateCreated,
       });
@@ -32,6 +28,8 @@ export default {
 
     return {
       exports: {
+        hydrate,
+
         cacheTodos: () => privateClient.cache(''),
 
         handle: privateClient.on,
@@ -54,8 +52,6 @@ export default {
           Object.entries(map).reduce((coll, item) => 
             coll.concat(hydrate(item[0], item[1])),
             [])),
-
-        hydrate,
       }
     }
   }
