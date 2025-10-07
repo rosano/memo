@@ -167,7 +167,7 @@ app {
 			border-radius: unset;
 		}
 
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 
 		display: flex;
