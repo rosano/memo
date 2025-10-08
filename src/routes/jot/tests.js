@@ -8,25 +8,25 @@ function uItem (properties = {}) {
 	}, properties);
 };
 
-describe('formatPlaintext', () => {
+describe('itemPlaintext', () => {
 	
 	it('returns input', () => {
 		const description = Math.random().toString();
-		expect(mod.formatPlaintext(uItem({
+		expect(mod.itemPlaintext(uItem({
 			description,
 		}))).toBe(description);
 	});
 	
 	it('converts newlines', () => {
 		const description = [Math.random().toString(), Math.random().toString()].join('\n\n\n');
-		expect(mod.formatPlaintext(uItem({
+		expect(mod.itemPlaintext(uItem({
 			description,
 		}))).toBe(description.replaceAll('\n', '<br>'));
 	});
 	
 	it('strikes if completed', () => {
 		const description = Math.random().toString();
-		expect(mod.formatPlaintext(uItem({
+		expect(mod.itemPlaintext(uItem({
 			description,
 			completed: true,
 		}))).toBe(`~~${ description }~~`);
