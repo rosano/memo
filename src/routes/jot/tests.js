@@ -23,7 +23,7 @@ describe('heading', () => {
 	
 	it('returns string', () => {
 		const item = new Date();
-		expect(mod.heading(item)).toBe(item.toJSON().slice(0, 10));
+		expect(mod.heading(item)).toBe('# ' + item.toJSON().slice(0, 10));
 	});
 
 });

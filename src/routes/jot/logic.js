@@ -14,7 +14,7 @@ const mod = {
 
 	heading (input) {
 		if ((input instanceof Date) && !Number.isNaN(input.getTime())) {
-			return input.toJSON().slice(0, 10);
+			return '# ' + input.toJSON().slice(0, 10);
 		}
 		
 		throw new Error('expected date');

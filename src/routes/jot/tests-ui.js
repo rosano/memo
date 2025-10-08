@@ -62,7 +62,7 @@ test('create jot-item', async ({ page }) => {
   await page.locator('button.jot-add').click();
 
   await expect(page.locator('textarea')).toHaveText('');
-  await expect(page.locator('section h1')).toHaveText('# ' + mod.heading(new Date()));
+  await expect(page.locator('section h1')).toHaveText(mod.heading(new Date()));
   await expect(page.locator('section p')).toHaveText(item);
 });
 
