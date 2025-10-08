@@ -3,6 +3,7 @@ import RemoteStorage from 'remotestoragejs';
 import Widget from 'remotestorage-widget';
 import todos from './remotestorage-module.js';
 import logic from './logic.js';
+import copyIcon from './copy.svg';
 
 // remoteStorage module
 const remoteStorage = new RemoteStorage({
@@ -106,7 +107,11 @@ onMount(() => {
 <div id="widget-wrapper"></div>
 
 <toolbar>
-	<button class="copy-text" on:click={ mod.copyText } disabled={ !mod._groups.length ? true : null }>copy text</button>
+	<button class="copy-text" on:click={ mod.copyText } disabled={ !mod._groups.length ? true : null }>
+		<!-- svelte-ignore a11y_missing_attribute -->
+		<img src="{copyIcon}" aria-hidden="true">
+		<span>copy text</span>
+	</button>
 </toolbar>
 
 <article>
@@ -152,12 +157,49 @@ app {
 	display: flex;
 	flex-direction: column;
 
+	button {
+		cursor: pointer;
+
+		/* OLSKMobileSafariRemoveDefaultInputStyle */
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+	}
+
 	#widget-wrapper :global(div) {
 		margin: auto;
 	}
 
 	toolbar {
 		padding: var(--spacing) 0;
+
+		display: flex;
+		justify-content: center;
+
+		button {
+			border: none;
+			background: none;
+
+			&:disabled * {
+				opacity: 0.25;
+			}
+
+			&:hover * {
+				opacity: 0.75;
+			}
+
+			&:active * {
+				opacity: 0.50;
+			}
+
+			img {
+				margin-right: calc(var(--spacing) / 2);
+			}
+		}
+
+		.copy-text {
+			display: flex;
+		}
 	}
 
 	article {
@@ -219,11 +261,6 @@ app {
 			margin-top: var(--spacing);
 			border: var(--border);
 			background: #eee;
-
-			/* OLSKMobileSafariRemoveDefaultInputStyle */
-			-webkit-appearance: none;
-			-moz-appearance: none;
-			appearance: none;
 		}
 	}
 }
