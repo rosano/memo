@@ -174,7 +174,7 @@ app {
 	p {
 		display: block;
 
-		s {
+		:global(s) {
 			opacity: 0.3;
 		}
 
