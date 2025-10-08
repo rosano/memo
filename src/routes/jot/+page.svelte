@@ -31,6 +31,8 @@ const mod = {
 
 	update: (item) => { mod.data(mod._data.map(e => e.$id === item.$id ? item : e)) },
 
+	// interface
+
 	submit: async () => {
 		await remoteStorage.todos.addTodo({
 			description: mod._description,
@@ -41,16 +43,20 @@ const mod = {
 		mod._textarea.focus();
 	},
 
-	visibilitychange (event) {
-		if (event.target.visibilityState === 'visible' && mod._textarea) {
-			setTimeout(() => mod._textarea.focus(), 100);
-		}
-	},
+	// react
 
 	keydown (event) {
 		if (event.key === 'Enter' && (event.altKey || event.ctrlKey || event.metaKey)) {
 			event.preventDefault();
 			mod.submit();
+		}
+	},
+
+	// lifecycle
+
+	visibilitychange (event) {
+		if (event.target.visibilityState === 'visible' && mod._textarea) {
+			setTimeout(() => mod._textarea.focus(), 100);
 		}
 	},
 
