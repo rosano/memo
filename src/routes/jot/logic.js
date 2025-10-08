@@ -8,8 +8,9 @@ const uDescending = function (a, b) {
 
 const mod = {
 
-	formatPlaintext (input) {
-		return input.replaceAll('\n', '<br>');
+	formatPlaintext (item) {
+		const wrap = item.completed ? '~~' : '';
+		return wrap + item.description.replaceAll('\n', '<br>') + wrap ;
 	},
 
 	heading (input) {

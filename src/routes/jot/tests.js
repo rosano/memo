@@ -1,16 +1,35 @@
 import { describe, it, expect } from 'vitest';
 import mod from './logic.js';
 
+function uItem (properties = {}) {
+	return Object.assign({
+		description: Math.random().toString(),
+		dateCreated: new Date(),
+	}, properties);
+};
+
 describe('formatPlaintext', () => {
 	
 	it('returns input', () => {
-		const item = Math.random().toString();
-		expect(mod.formatPlaintext(item)).toBe(item);
+		const description = Math.random().toString();
+		expect(mod.formatPlaintext(uItem({
+			description,
+		}))).toBe(description);
 	});
 	
 	it('converts newlines', () => {
-		const item = Math.random().toString() + '\n';
-		expect(mod.formatPlaintext(item)).toBe(item.trim() + '<br>');
+		const description = [Math.random().toString(), Math.random().toString()].join('\n\n\n');
+		expect(mod.formatPlaintext(uItem({
+			description,
+		}))).toBe(description.replaceAll('\n', '<br>'));
+	});
+	
+	it('strikes if completed', () => {
+		const description = Math.random().toString();
+		expect(mod.formatPlaintext(uItem({
+			description,
+			completed: true,
+		}))).toBe(`~~${ description }~~`);
 	});
 
 });
@@ -30,13 +49,6 @@ describe('heading', () => {
 
 describe('groupItems', () => {
 
-	function uItem (properties = {}) {
-		return Object.assign({
-			description: Math.random().toString(),
-			dateCreated: new Date(),
-		}, properties);
-	};
-	
 	it('groups by date', () => {
 		const items = [uItem(), uItem()];
 		expect(mod.groupItems(items)).toEqual([{

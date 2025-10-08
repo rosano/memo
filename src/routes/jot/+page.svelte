@@ -111,7 +111,7 @@ onMount(() => {
 		<h1>{ group.name }</h1>
 
 		{#each group.items as item, index }
-			<p>{#if item.completed }<s>~~{@html logic.formatPlaintext(item.description) }~~</s>{:else }{@html logic.formatPlaintext(item.description) }{/if}</p>	
+			<p>{#if item.completed }<s>{@html logic.formatPlaintext(item.description) }</s>{:else }{@html logic.formatPlaintext(item.description) }{/if}</p>	
 		{/each}
 	{/each}
 </article>
