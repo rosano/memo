@@ -20,17 +20,9 @@ test('manifest', ({ page }) =>
 	expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/manifest.json')
 );
 
-test.describe('button.copy-text', () => {
-
-	test('text', ({ page }) =>
-		expect(page.locator('button.copy-text')).toHaveAttribute('title', 'copy text')
-	);
-
-	test('disabled', ({ page }) =>
-		expect(page.locator('button.copy-text')).toHaveAttribute('disabled', '')
-	);
-	
-});
+test('button.copy-text', ({ page }) =>
+	expect(page.locator('button.copy-text')).toBeDisabled()	
+);
 
 test.describe('textarea', () => {
 
@@ -61,11 +53,11 @@ test.describe('button.jot-add', () => {
 });
 
 test('jot-item', ({ page }) => 
-	expect(page.locator('section p')).toHaveCount(0)
+	expect(page.locator('article p')).toHaveCount(0)
 );
 
 test('headings', ({ page }) => 
-	expect(page.locator('section h1')).toHaveCount(0)
+	expect(page.locator('article h1')).toHaveCount(0)
 );
 
 test('create jot-item', async ({ page }) => {
@@ -74,8 +66,8 @@ test('create jot-item', async ({ page }) => {
   await page.locator('button.jot-add').click();
 
   await expect(page.locator('textarea')).toHaveText('');
-  await expect(page.locator('section h1')).toHaveText(mod.heading(new Date()));
-  await expect(page.locator('section p')).toHaveText(item);
+  await expect(page.locator('article h1')).toHaveText(mod.heading(new Date()));
+  await expect(page.locator('article p')).toHaveText(item);
 });
 
 test('create jot-item multiline', async ({ page }) => {
@@ -83,7 +75,7 @@ test('create jot-item multiline', async ({ page }) => {
 	await page.locator('textarea').fill(item);
   await page.locator('button.jot-add').click();
 
-  await expect(await page.locator('section p').innerHTML()).toEqual(expect.stringContaining(item.replace('\n', '<br>')));
+  await expect(await page.locator('article p').innerHTML()).toEqual(expect.stringContaining(item.replace('\n', '<br>')));
 });
 
 test.describe('shortcuts', () => {
@@ -94,12 +86,12 @@ test.describe('shortcuts', () => {
 		'Meta+Enter',
 	].forEach(shortcut =>
 
-		test.skip(shortcut, async ({ page }) => {
+		test(shortcut, async ({ page }) => {
 			const item = Math.random().toString();
 			await page.locator('textarea').fill(item);
 			await page.getByRole('textbox').press(shortcut);
 
-		  await expect(page.locator('section p')).toHaveText(item);
+		  await expect(page.locator('article p')).toHaveText(item);
 		})
 
 	);
@@ -119,6 +111,8 @@ test('copy all', async ({ page, context }) => {
 	await page.locator('button.jot-add').click()
 	await page.locator('textarea').fill(items[1].description);
 	await page.locator('button.jot-add').click();
+
+	expect(page.locator('button.copy-text')).toHaveText('copy text');
 
 	// Grant clipboard permissions to browser context
 	await context.grantPermissions(["clipboard-read", "clipboard-write"]);

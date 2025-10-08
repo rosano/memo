@@ -111,7 +111,7 @@ onMount(() => {
 
 <article>
 	{#if !mod._groups.length }
-		<p>&nbsp;</p>
+		<placeholder>&nbsp;</placeholder>
 	{/if}
 	{#each mod._groups as group }
 		<h1>{ group.name }</h1>
