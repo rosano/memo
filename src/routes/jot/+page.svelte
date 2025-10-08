@@ -97,7 +97,7 @@ onMount(() => {
 
 <div id="widget-wrapper"></div>
 
-<section>
+<article>
 	{#each mod._groups as group }
 		<h1># { group.name }</h1>
 
@@ -105,7 +105,7 @@ onMount(() => {
 			<p>{#if item.completed }<s>~~{@html logic.formatPlaintext(item.description) }~~</s>{:else }{@html logic.formatPlaintext(item.description) }{/if}</p>	
 		{/each}
 	{/each}
-</section>
+</article>
 
 <footer>
 	<!-- svelte-ignore a11y_autofocus -->
@@ -117,48 +117,23 @@ onMount(() => {
 
 <style>
 :root {
-	--spacing: 10px;
-	--corner: 3px;
-	--cap: 600px;
-	--line-border: 1px solid #eee;
-	--background: #eee;
+	--border: 1px solid #eee;
 }
 
 :global {
-
-	body {
+	layout {
+		display: flex !important;
 		height: 100dvh;
 
-		background: var(--background);
-	}
-
-	.sveltekit {
-		height: inherit;
-		display: flex !important;
 		flex-direction: column;
 
 		app {
 			flex-grow: 1;
 		}
 	}
-
-	nav {
-		padding: calc(var(--spacing) / 2);
-
-		text-align: center;
-	}
-
 }
 
 app {
-	width: 100%;
-	max-width: var(--cap);
-
-	margin: auto;
-
-	background: var(--background);
-	font-family: monospace;
-
 	display: flex;
 	flex-direction: column;
 
@@ -166,18 +141,14 @@ app {
 		margin: auto;
 	}
 
-	section {
-		padding: var(--spacing);
-
-		background: #f9f9f9;
-
+	article {
 		flex-grow: 1;
 
 		/* wrap long urls  */
 		word-break: break-word;
 
-		@media (min-width: 450px) {
-			border-radius: var(--corner);
+		@media (max-width: 450px) {
+			border-radius: 0;
 		}
 	}
 
@@ -197,10 +168,10 @@ app {
 		width: calc(100% - var(--spacing) * 2);
 		max-width: var(--cap);
 		padding: var(--spacing);
-		border-top: var(--line-border);
+		border-top: var(--border);
 		border-radius: var(--corner) var(--corner) 0 0;
 
-		background: #fdfdfd;
+		background: #fefefe;
 
 		@media (max-width: 450px) {
 			border-radius: unset;
@@ -225,8 +196,15 @@ app {
 		}
 
 		button {
-			padding: calc(var(--spacing) * 1) 0;
+			padding: calc(var(--spacing) * 1.5) 0;
 			margin-top: var(--spacing);
+			border: var(--border);
+			background: #eee;
+
+			/* OLSKMobileSafariRemoveDefaultInputStyle */
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
 		}
 	}
 }

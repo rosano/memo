@@ -16,6 +16,8 @@ let { children, data } = $props();
 	{/if}
 </svelte:head>
 
+<layout>
+
 <header>
 	<nav>
 		{#each data.navigation as section, index}
@@ -24,4 +26,45 @@ let { children, data } = $props();
 	</nav>
 </header>
 
-{@render children?.()}
+<children>{@render children?.()}</children>
+	
+</layout>
+
+<style>
+:root {
+	--spacing: 10px;
+	--cap: 600px;
+	--background: #eee;
+	--foreground: #f9f9f9;
+	--corner: 3px;
+}
+
+:global {
+	body {
+		background: var(--background);
+		font-family: monospace;
+	}
+
+	layout {
+		display: block;
+		width: 100%;
+		max-width: var(--cap);
+
+		margin: auto;
+
+		article {
+			display: block;
+			padding: var(--spacing);
+			border-radius: var(--corner);
+
+			background: var(--foreground);
+		}
+	}
+}
+
+nav {
+	padding: calc(var(--spacing) / 2);
+
+	text-align: center;
+}
+</style>
