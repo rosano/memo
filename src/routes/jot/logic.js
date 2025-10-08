@@ -6,11 +6,21 @@ const uDescending = function (a, b) {
   return (a > b) ? -1 : ((a < b) ? 1 : 0);
 };
 
+const uFlatten = function (inputData) {
+	return [].concat.apply([], inputData);
+};
+
 const mod = {
 
 	itemPlaintext (item) {
 		const wrap = item.completed ? '~~' : '';
-		return wrap + item.description.replaceAll('\n', '<br>') + wrap ;
+		return wrap + item.description + wrap;
+	},
+
+	itemHTML (item) {
+		const open = item.completed ? '<s>' : '';
+		const close = item.completed ? '</s>' : '';
+		return open + mod.itemPlaintext(item).replaceAll('\n', '<br>') + close;
 	},
 
 	heading (input) {
@@ -31,6 +41,10 @@ const mod = {
 
 			return coll.filter(e => !filter(e)).concat(group).sort((a, b) => uDescending(a.name, b.name));
 		}, []);
+	},
+
+	groupsPlaintext (groups) {
+		return uFlatten(groups.map(e => [e.name, ...e.items.map(mod.itemPlaintext)])).join('\n\n');
 	},
 
 };

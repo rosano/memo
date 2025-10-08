@@ -43,6 +43,8 @@ const mod = {
 		mod._textarea.focus();
 	},
 
+	copyText: () => navigator.clipboard ? navigator.clipboard.writeText(logic.groupsPlaintext(mod._groups)) : null,
+
 	// react
 
 	keydown (event) {
@@ -103,6 +105,10 @@ onMount(() => {
 
 <div id="widget-wrapper"></div>
 
+<toolbar>
+	<button class="copy-text" on:click={ mod.copyText } disabled={ !mod._groups.length ? true : null }>copy text</button>
+</toolbar>
+
 <article>
 	{#if !mod._groups.length }
 		<p>&nbsp;</p>
@@ -111,7 +117,7 @@ onMount(() => {
 		<h1>{ group.name }</h1>
 
 		{#each group.items as item, index }
-			<p>{#if item.completed }<s>{@html logic.itemPlaintext(item.description) }</s>{:else }{@html logic.itemPlaintext(item.description) }{/if}</p>	
+			<p>{@html logic.itemHTML(item) }</p>	
 		{/each}
 	{/each}
 </article>
@@ -148,6 +154,10 @@ app {
 
 	#widget-wrapper :global(div) {
 		margin: auto;
+	}
+
+	toolbar {
+		padding: var(--spacing) 0;
 	}
 
 	article {

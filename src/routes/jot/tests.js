@@ -93,3 +93,19 @@ describe('groupItems', () => {
 	});
 
 });
+
+describe('groupsPlaintext', () => {
+	
+	it('returns string', () => {
+		const items = [uItem({
+			dateCreated: new Date('2000-01-01'),
+		}), uItem()];
+		expect(mod.groupsPlaintext(mod.groupItems(items))).toEqual([
+			mod.heading(items[1].dateCreated),
+			mod.itemPlaintext(items[1]),
+			mod.heading(items[0].dateCreated),
+			mod.itemPlaintext(items[0]),
+		].join('\n\n'));
+	});
+
+});

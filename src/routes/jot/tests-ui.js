@@ -20,6 +20,18 @@ test('manifest', ({ page }) =>
 	expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/manifest.json')
 );
 
+test.describe('button.copy-text', () => {
+
+	test('text', ({ page }) =>
+		expect(page.locator('button.copy-text')).toHaveAttribute('title', 'copy text')
+	);
+
+	test('disabled', ({ page }) =>
+		expect(page.locator('button.copy-text')).toHaveAttribute('disabled', '')
+	);
+	
+});
+
 test.describe('textarea', () => {
 
 	test('placeholder', ({ page }) =>
@@ -92,4 +104,25 @@ test.describe('shortcuts', () => {
 
 	);
 
+});
+
+test('copy all', async ({ page, context }) => {
+	function uItem (properties = {}) {
+		return Object.assign({
+			description: Math.random().toString(),
+			dateCreated: new Date(),
+		}, properties);
+	};
+
+	const items = [uItem(), uItem()];
+	await page.locator('textarea').fill(items[0].description);
+	await page.locator('button.jot-add').click()
+	await page.locator('textarea').fill(items[1].description);
+	await page.locator('button.jot-add').click();
+
+	// Grant clipboard permissions to browser context
+	await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+
+	await page.locator('button.copy-text').click();
+	expect(await (await page.evaluateHandle(() => navigator.clipboard.readText())).jsonValue()).toEqual(mod.groupsPlaintext(mod.groupItems(items)));
 });
