@@ -104,6 +104,9 @@ onMount(() => {
 <div id="widget-wrapper"></div>
 
 <article>
+	{#if !mod._groups.length }
+		<p>&nbsp;</p>
+	{/if}
 	{#each mod._groups as group }
 		<h1># { group.name }</h1>
 
