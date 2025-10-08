@@ -20,7 +20,7 @@ test('manifest', ({ page }) =>
 	expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/manifest.json')
 );
 
-test.describe('placeholder', () => {
+test.describe('textarea', () => {
 
 	test('placeholder', ({ page }) =>
 		expect(page.locator('textarea')).toHaveAttribute('placeholder', 'what are you thinking?')
