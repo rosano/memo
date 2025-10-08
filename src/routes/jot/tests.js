@@ -17,19 +17,23 @@ describe('itemPlaintext', () => {
 		}))).toBe(description);
 	});
 	
-	it('converts newlines', () => {
-		const description = [Math.random().toString(), Math.random().toString()].join('\n\n\n');
-		expect(mod.itemPlaintext(uItem({
-			description,
-		}))).toBe(description.replaceAll('\n', '<br>'));
-	});
-	
 	it('strikes if completed', () => {
 		const description = Math.random().toString();
 		expect(mod.itemPlaintext(uItem({
 			description,
 			completed: true,
 		}))).toBe(`~~${ description }~~`);
+	});
+
+});
+
+describe('itemHTML', () => {
+	
+	it('converts newlines', () => {
+		const description = [Math.random().toString(), Math.random().toString()].join('\n\n\n');
+		expect(mod.itemHTML(uItem({
+			description,
+		}))).toBe(description.replaceAll('\n', '<br>'));
 	});
 
 });
