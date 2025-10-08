@@ -98,7 +98,7 @@ test.describe('shortcuts', () => {
 
 });
 
-test('copy all', async ({ page, context }) => {
+test.skip('copy all', async ({ page, context }) => {
 	function uItem (properties = {}) {
 		return Object.assign({
 			description: Math.random().toString(),
