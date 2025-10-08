@@ -36,14 +36,14 @@ describe('itemPlaintext', () => {
 
 describe('heading', () => {
 
-	it('throws if not valid', () => {
-		expect(() => mod.heading()).toThrowError('expected date');
-	});
-	
 	it('returns string', () => {
 		const item = new Date();
 		expect(mod.heading(item)).toBe('# ' + item.toJSON().slice(0, 10));
 	});
+
+	it('returns Other if not valid', () => 
+		expect(mod.heading(Math.random().toString())).toBe('# Other')
+	);
 
 });
 
@@ -62,7 +62,7 @@ describe('groupItems', () => {
 			dateCreated: undefined,
 		})];
 		expect(mod.groupItems(items)).toEqual([{
-			name: 'Other',
+			name: '# Other',
 			items,
 		}]);
 	});
