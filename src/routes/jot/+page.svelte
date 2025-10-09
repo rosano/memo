@@ -4,6 +4,7 @@ import Widget from 'remotestorage-widget';
 import todos from './remotestorage-module.js';
 import logic from './logic.js';
 import copyIcon from './copy.svg';
+import completeIcon from './complete.svg';
 
 // remoteStorage module
 const remoteStorage = new RemoteStorage({
@@ -45,6 +46,15 @@ const mod = {
 	},
 
 	copyText: () => navigator.clipboard ? navigator.clipboard.writeText(logic.groupsPlaintext(mod._groups)) : null,
+
+	toggleComplete: () => Promise.all(
+		mod._data.map(e => remoteStorage.todos.updateTodo(
+			e.$id,
+			Object.assign(e, {
+				completed: !e.completed,
+			})),
+		),
+	).then(mod.data),
 
 	// react
 
@@ -111,6 +121,11 @@ onMount(() => {
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{copyIcon}" aria-hidden="true">
 		<span>copy text</span>
+	</button>
+	<button class="toggle-complete" on:click={ mod.toggleComplete } disabled={ !mod._groups.length ? true : null }>
+		<!-- svelte-ignore a11y_missing_attribute -->
+		<img src="{completeIcon}" aria-hidden="true">
+		<span>complete</span>
 	</button>
 </toolbar>
 
@@ -180,6 +195,8 @@ app {
 			border: none;
 			background: none;
 
+			display: flex;
+
 			&:disabled * {
 				opacity: 0.25;
 			}
@@ -195,10 +212,10 @@ app {
 			img {
 				margin-right: calc(var(--spacing) / 2);
 			}
-		}
 
-		.copy-text {
-			display: flex;
+			span {
+				flex-shrink: 0;
+			}
 		}
 	}
 

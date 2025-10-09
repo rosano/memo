@@ -1,6 +1,13 @@
 import { test, expect } from '@playwright/test';
 import mod from './logic.js';
 
+function uItem (properties = {}) {
+	return Object.assign({
+		description: Math.random().toString(),
+		dateCreated: new Date(),
+	}, properties);
+};
+
 test.beforeEach(({ page }) => page.goto('/jot'));
 
 test('title', async ({ page }) =>
@@ -22,6 +29,10 @@ test('manifest', ({ page }) =>
 
 test('button.copy-text', ({ page }) =>
 	expect(page.locator('button.copy-text')).toBeDisabled()	
+);
+
+test('button.toggle-complete', ({ page }) =>
+	expect(page.locator('button.toggle-complete')).toBeDisabled()	
 );
 
 test.describe('textarea', () => {
@@ -99,13 +110,6 @@ test.describe('shortcuts', () => {
 });
 
 test.skip('copy all', async ({ page, context }) => {
-	function uItem (properties = {}) {
-		return Object.assign({
-			description: Math.random().toString(),
-			dateCreated: new Date(),
-		}, properties);
-	};
-
 	const items = [uItem(), uItem()];
 	await page.locator('textarea').fill(items[0].description);
 	await page.locator('button.jot-add').click()
@@ -119,4 +123,19 @@ test.skip('copy all', async ({ page, context }) => {
 
 	await page.locator('button.copy-text').click();
 	expect(await (await page.evaluateHandle(() => navigator.clipboard.readText())).jsonValue()).toEqual(mod.groupsPlaintext(mod.groupItems(items)));
+});
+
+test('toggle-complete', async ({ page, context }) => {
+	const items = [uItem(), uItem()].map(e => Object.assign(e, {
+		completed: true,
+	}));
+	await page.locator('textarea').fill(items[0].description);
+	await page.locator('button.jot-add').click()
+	await page.locator('textarea').fill(items[1].description);
+	await page.locator('button.jot-add').click();
+
+	expect(page.locator('button.toggle-complete')).toHaveText('complete');
+
+	await page.locator('button.toggle-complete').click();
+	await expect(page.locator('article p s')).toHaveText(items.map(mod.itemPlaintext));
 });
