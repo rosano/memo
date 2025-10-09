@@ -13,6 +13,9 @@ const config = {
 			precompress: false,
 			strict: true,
 		}),
+		version: {
+			pollInterval: 5000,
+		},
 	},
 	preprocess: [mdsvex({
 		extensions: ['.sv.md']

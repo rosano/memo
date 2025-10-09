@@ -2,6 +2,7 @@
 import 'normalize.css/normalize.css';
 import { dev } from '$app/environment';
 import { page } from '$app/state';
+import Toast from './toast.svelte';
 let { children, data } = $props();
 </script>
 
@@ -28,6 +29,8 @@ let { children, data } = $props();
 
 <children>{@render children?.()}</children>
 	
+<Toast></Toast>
+
 </layout>
 
 <style>
