@@ -5,9 +5,9 @@ let _updateVisible = true;
 </script>
 
 {#if updated.current && _updateVisible}
-	<toast onclick={ () => _updateVisible = false }>
-		<p>new update available</p>
-		<a href="#" onclick={ () => location.reload() }>Reload</a>
+	<toast>
+		<button class="close" onclick={ () => _updateVisible = false }>new update available</button>
+		<button onclick={ () => location.reload() }>Reload</button>
 	</toast>
 {/if}
 
@@ -16,7 +16,6 @@ toast {
 	--spacing: 10px;
 	--corner: 3px;
 
-	padding: var(--spacing);
 	border: 1px solid #b265ff;
 	border-radius: var(--corner);
 	
@@ -30,24 +29,19 @@ toast {
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 
 	display: flex;
-	gap: var(--spacing);
 
-	/* DisableTextSelection */
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none; /* Safari */
-	-khtml-user-select: none; /* Konqueror HTML */
-	-moz-user-select: none; /* Firefox */
-	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+	button {
+		padding: var(--spacing);
+		
+		color: white;
 
-	p {
-		margin: 0;
-		opacity: 0.8;
-	}
+		&.close {
+			opacity: 0.8;
+		}
 
-	a {
-		color: inherit;
-		text-decoration: none;
+		appearance: none;
+		border: 0;
+		background: none;
 	}
 }
 </style>
