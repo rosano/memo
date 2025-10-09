@@ -38,13 +38,12 @@ export default {
         handle: privateClient.on,
 
         addTodo: (object) => {
-          const date = new Date();
-          const dateCreated = date.toJSON();
-          const $id = dateCreated.replace(/\D/g, '');
+          dehydrate(Object.assign(object, {
+            dateCreated: new Date(),
+          }));
 
-          return privateClient.storeObject('todo', $id, Object.assign(object, {
-            dateCreated,
-          })).then(e => hydrate($id, object));
+          const $id = object.dateCreated.replace(/\D/g, '');
+          return privateClient.storeObject('todo', $id, object).then(e => hydrate($id, object));
         },
 
         updateTodo: ($id, object) => privateClient.storeObject('todo', $id, dehydrate(object)).then(e => hydrate($id, object)),
