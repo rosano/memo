@@ -22,4 +22,9 @@ export default defineConfig({
 			'loc.sv',
 		],
 	},
+	exclude: [
+		'svelte-codemirror-editor',
+		'codemirror',
+		'@codemirror/language-markdown',
+	],
 });

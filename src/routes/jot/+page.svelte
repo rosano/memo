@@ -7,6 +7,10 @@ import copyIcon from './copy.svg';
 import completeIcon from './complete.svg';
 import discardIcon from './discard.svg';
 
+import CodeMirror from "svelte-codemirror-editor";
+import { markdown } from "@codemirror/lang-markdown";
+import { EditorView } from "@codemirror/view";
+
 // remoteStorage module
 const remoteStorage = new RemoteStorage({
   modules: [todos],
@@ -20,6 +24,7 @@ remoteStorage.todos.cacheTodos();
 const mod = {
 
 	_description: '',
+	descriptionEmpty: () => mod._description.trim() === '',
 
 	_data: [],
 	_groups: [],
@@ -66,10 +71,16 @@ const mod = {
 	// react
 
 	keydown (event) {
-		if (event.key === 'Enter' && (event.altKey || event.ctrlKey || event.metaKey)) {
-			event.preventDefault();
+		if (!mod.descriptionEmpty() && event.key === 'Enter' && (event.altKey || event.ctrlKey || event.metaKey)) {
 			mod.submit();
+			event.preventDefault();
+
+			// Return true to indicate the event was handled
+			return true;
 		}
+
+		// Return false to allow default handling
+		return false;
 	},
 
 	// lifecycle
@@ -155,9 +166,8 @@ onMount(() => {
 </article>
 
 <footer>
-	<!-- svelte-ignore a11y_autofocus -->
-	<textarea required autofocus placeholder="what are you thinking?" bind:value={ mod._description } bind:this={ mod._textarea } onkeydown={ mod.keydown }></textarea>
-	<button class="jot-add" onclick={ mod.submit } disabled={ mod._description.trim() === '' ? true : null }>jot</button>
+	<CodeMirror bind:value={ mod._description } lang={ markdown() } lineNumbers={ false } highlight={ {activeLine: false,} } placeholder="what are you thinking?" extensions={ [EditorView.domEventHandlers({ keydown: mod.keydown })] } onready={ e => (mod._textarea = e).focus() } />
+	<button class="jot-add" onclick={ mod.submit } disabled={ mod.descriptionEmpty() ? true : null }>jot</button>
 </footer>
 
 </app>
@@ -176,6 +186,18 @@ onMount(() => {
 
 		app {
 			flex-grow: 1;
+
+			.cm-gutters {
+			  display: none !important;
+			}
+
+			.cm-line {
+				padding: 0 !important;
+			}
+
+			.cm-content {
+				height: 100px;
+			}
 		}
 	}
 }
@@ -274,18 +296,6 @@ app {
 
 		display: flex;
 		flex-direction: column;
-
-		textarea {
-			border: 0;
-			resize: none;
-			height: 100px;
-
-			flex-grow: 1;
-
-			&:focus {
-				outline: none !important;
-			}
-		}
 
 		button {
 			padding: calc(var(--spacing) * 1.5) 0;
