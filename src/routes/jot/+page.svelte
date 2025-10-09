@@ -124,17 +124,17 @@ onMount(() => {
 <div id="widget-wrapper"></div>
 
 <toolbar>
-	<button class="copy-text" on:click={ mod.copyText } disabled={ !mod._groups.length ? true : null }>
+	<button class="copy-text" onclick={ mod.copyText } disabled={ !mod._groups.length ? true : null }>
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{copyIcon}" aria-hidden="true">
 		<span>copy text</span>
 	</button>
-	<button class="mark-done" on:click={ mod.markDone } disabled={ !mod._groups.length ? true : null }>
+	<button class="mark-done" onclick={ mod.markDone } disabled={ !mod._groups.length ? true : null }>
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{completeIcon}" aria-hidden="true">
 		<span>mark done</span>
 	</button>
-	<button class="discard-completed" on:click={ mod.discardCompleted } disabled={ !mod._completed.length ? true : null }>
+	<button class="discard-completed" onclick={ mod.discardCompleted } disabled={ !mod._completed.length ? true : null }>
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{discardIcon}" aria-hidden="true">
 		<span>discard</span>
@@ -156,8 +156,8 @@ onMount(() => {
 
 <footer>
 	<!-- svelte-ignore a11y_autofocus -->
-	<textarea required autofocus placeholder="what are you thinking?" bind:value={ mod._description } bind:this={ mod._textarea } on:keydown={ mod.keydown }></textarea>
-	<button class="jot-add" on:click={ mod.submit } disabled={ mod._description.trim() === '' ? true : null }>jot</button>
+	<textarea required autofocus placeholder="what are you thinking?" bind:value={ mod._description } bind:this={ mod._textarea } onkeydown={ mod.keydown }></textarea>
+	<button class="jot-add" onclick={ mod.submit } disabled={ mod._description.trim() === '' ? true : null }>jot</button>
 </footer>
 
 </app>
