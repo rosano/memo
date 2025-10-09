@@ -15,6 +15,7 @@ export default {
       delete object.$id;
 
       return Object.assign(object, {
+        description: object.description.trim(),
         dateCreated: object.dateCreated.toJSON(),
       });
     };
