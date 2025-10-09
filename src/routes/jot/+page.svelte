@@ -213,12 +213,14 @@ app {
 				opacity: 0.25;
 			}
 
-			&:hover * {
-				opacity: 0.75;
-			}
+			&:not(&:disabled) {
+				&:hover * {
+					opacity: 0.75;
+				}
 
-			&:active * {
-				opacity: 0.50;
+				&:active * {
+					opacity: 0.50;
+				}
 			}
 
 			img {
