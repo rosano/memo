@@ -14,7 +14,9 @@ export default {
     const dehydrate = function (object) {
       delete object.$id;
 
-      return object;
+      return Object.assign(object, {
+        dateCreated: object.dateCreated.toJSON(),
+      });
     };
 
     const hydrate = function (path, object) {
