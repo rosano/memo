@@ -17,6 +17,10 @@ test('h1', ({ page }) =>
 	expect(page.locator('h1')).toHaveText('memo')
 );
 
-test('p', ({ page }) =>
-  expect(page.locator('p')).toHaveText('Capture thoughts and sync to multiple devices with remoteStorage.')
+test('description', ({ page }) =>
+  expect(page.locator('p:first-of-type')).toHaveText('Capture thoughts and sync to multiple devices with remoteStorage.')
+);
+
+test('open-source', ({ page }) =>
+  expect(page.locator('p:nth-of-type(2)')).toHaveText('open-source')
 );
