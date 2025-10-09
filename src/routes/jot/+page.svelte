@@ -5,6 +5,7 @@ import todos from './remotestorage-module.js';
 import logic from './logic.js';
 import copyIcon from './copy.svg';
 import completeIcon from './complete.svg';
+import discardIcon from './discard.svg';
 
 // remoteStorage module
 const remoteStorage = new RemoteStorage({
@@ -22,14 +23,18 @@ const mod = {
 
 	_data: [],
 	_groups: [],
-	data: (data) => mod._groups = logic.groupItems(mod._data = data),
+	_completed: [],
+	data: (data) => {
+		mod._groups = logic.groupItems(mod._data = data);
+		mod._completed = mod._data.filter(e => e.completed);
+	},
 
 	add: (item) => { mod.data(mod._data.concat(item)) },
 
 	remove: (item) => { mod.data(mod._data.filter(e => e.$id !== item.$id)) },
 	
 	// modify: (item) => { remoteStorage.todos.updateTodo(item.$id, Object.assign(item, { description: Math.random().toString() })) },
-	// delete: (item) => { remoteStorage.todos.removeTodo(item.$id) },
+	// discard: (item) => { remoteStorage.todos.removeTodo(item.$id) },
 
 	update: (item) => { mod.data(mod._data.map(e => e.$id === item.$id ? item : e)) },
 
@@ -55,6 +60,8 @@ const mod = {
 			})),
 		),
 	).then(mod.data),
+
+	discardCompleted: () => mod._completed.forEach(e => remoteStorage.todos.removeTodo(e.$id)),
 
 	// react
 
@@ -126,6 +133,11 @@ onMount(() => {
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{completeIcon}" aria-hidden="true">
 		<span>toggle</span>
+	</button>
+	<button class="discard-completed" on:click={ mod.discardCompleted } disabled={ !mod._completed.length ? true : null }>
+		<!-- svelte-ignore a11y_missing_attribute -->
+		<img src="{discardIcon}" aria-hidden="true">
+		<span>discard</span>
 	</button>
 </toolbar>
 

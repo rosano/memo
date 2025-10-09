@@ -35,6 +35,13 @@ test('button.toggle-complete', ({ page }) =>
 	expect(page.locator('button.toggle-complete')).toBeDisabled()
 );
 
+test('button.discard-completed', async ({ page }) => {
+	await page.locator('textarea').fill(Math.random().toString());
+	await page.locator('button.jot-add').click()
+	
+	expect(page.locator('button.discard-completed')).toBeDisabled()
+});
+
 test.describe('textarea', () => {
 
 	test('placeholder', ({ page }) =>
@@ -138,4 +145,18 @@ test('toggle-complete', async ({ page, context }) => {
 	await expect(page.locator('article p s')).toHaveText(items.map(e => mod.itemPlaintext(Object.assign(e, {
 		completed: true,
 	}))));
+});
+
+test('discard-completed', async ({ page, context }) => {
+	const items = [uItem(), uItem()];
+	await page.locator('textarea').fill(items[0].description);
+	await page.locator('button.jot-add').click()
+	await page.locator('textarea').fill(items[1].description);
+	await page.locator('button.jot-add').click();
+	await page.locator('button.toggle-complete').click();
+
+	expect(page.locator('button.discard-completed')).toHaveText('discard');
+
+	await page.locator('button.discard-completed').click();
+	await expect(page.locator('article p')).toHaveCount(0);
 });
