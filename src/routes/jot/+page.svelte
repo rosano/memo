@@ -125,7 +125,7 @@ onMount(() => {
 	<button class="toggle-complete" on:click={ mod.toggleComplete } disabled={ !mod._groups.length ? true : null }>
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{completeIcon}" aria-hidden="true">
-		<span>complete</span>
+		<span>toggle</span>
 	</button>
 </toolbar>
 

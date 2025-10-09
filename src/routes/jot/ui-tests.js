@@ -126,16 +126,16 @@ test.skip('copy all', async ({ page, context }) => {
 });
 
 test('toggle-complete', async ({ page, context }) => {
-	const items = [uItem(), uItem()].map(e => Object.assign(e, {
-		completed: true,
-	}));
+	const items = [uItem(), uItem()];
 	await page.locator('textarea').fill(items[0].description);
 	await page.locator('button.jot-add').click()
 	await page.locator('textarea').fill(items[1].description);
 	await page.locator('button.jot-add').click();
 
-	expect(page.locator('button.toggle-complete')).toHaveText('complete');
+	expect(page.locator('button.toggle-complete')).toHaveText('toggle');
 
 	await page.locator('button.toggle-complete').click();
-	await expect(page.locator('article p s')).toHaveText(items.map(mod.itemPlaintext));
+	await expect(page.locator('article p s')).toHaveText(items.map(e => mod.itemPlaintext(Object.assign(e, {
+		completed: true,
+	}))));
 });
