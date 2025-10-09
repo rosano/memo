@@ -31,8 +31,8 @@ test('button.copy-text', ({ page }) =>
 	expect(page.locator('button.copy-text')).toBeDisabled()
 );
 
-test('button.toggle-complete', ({ page }) =>
-	expect(page.locator('button.toggle-complete')).toBeDisabled()
+test('button.mark-done', ({ page }) =>
+	expect(page.locator('button.mark-done')).toBeDisabled()
 );
 
 test('button.discard-completed', async ({ page }) => {
@@ -132,16 +132,16 @@ test.skip('copy all', async ({ page, context }) => {
 	expect(await (await page.evaluateHandle(() => navigator.clipboard.readText())).jsonValue()).toEqual(mod.groupsPlaintext(mod.groupItems(items)));
 });
 
-test('toggle-complete', async ({ page, context }) => {
+test('mark-done', async ({ page, context }) => {
 	const items = [uItem(), uItem()];
 	await page.locator('textarea').fill(items[0].description);
 	await page.locator('button.jot-add').click()
 	await page.locator('textarea').fill(items[1].description);
 	await page.locator('button.jot-add').click();
 
-	expect(page.locator('button.toggle-complete')).toHaveText('toggle');
+	expect(page.locator('button.mark-done')).toHaveText('mark done');
 
-	await page.locator('button.toggle-complete').click();
+	await page.locator('button.mark-done').click();
 	await expect(page.locator('article p s')).toHaveText(items.map(e => mod.itemPlaintext(Object.assign(e, {
 		completed: true,
 	}))));
@@ -153,7 +153,7 @@ test('discard-completed', async ({ page, context }) => {
 	await page.locator('button.jot-add').click()
 	await page.locator('textarea').fill(items[1].description);
 	await page.locator('button.jot-add').click();
-	await page.locator('button.toggle-complete').click();
+	await page.locator('button.mark-done').click();
 
 	expect(page.locator('button.discard-completed')).toHaveText('discard');
 

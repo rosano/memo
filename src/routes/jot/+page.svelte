@@ -52,7 +52,7 @@ const mod = {
 
 	copyText: () => navigator.clipboard ? navigator.clipboard.writeText(logic.groupsPlaintext(mod._groups)) : null,
 
-	toggleComplete: () => Promise.all(
+	markDone: () => Promise.all(
 		mod._data.map(e => remoteStorage.todos.updateTodo(
 			e.$id,
 			Object.assign(e, {
@@ -129,10 +129,10 @@ onMount(() => {
 		<img src="{copyIcon}" aria-hidden="true">
 		<span>copy text</span>
 	</button>
-	<button class="toggle-complete" on:click={ mod.toggleComplete } disabled={ !mod._groups.length ? true : null }>
+	<button class="mark-done" on:click={ mod.markDone } disabled={ !mod._groups.length ? true : null }>
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{completeIcon}" aria-hidden="true">
-		<span>toggle</span>
+		<span>mark done</span>
 	</button>
 	<button class="discard-completed" on:click={ mod.discardCompleted } disabled={ !mod._completed.length ? true : null }>
 		<!-- svelte-ignore a11y_missing_attribute -->
