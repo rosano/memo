@@ -28,11 +28,11 @@ test('manifest', ({ page }) =>
 );
 
 test('button.copy-text', ({ page }) =>
-	expect(page.locator('button.copy-text')).toBeDisabled()	
+	expect(page.locator('button.copy-text')).toBeDisabled()
 );
 
 test('button.toggle-complete', ({ page }) =>
-	expect(page.locator('button.toggle-complete')).toBeDisabled()	
+	expect(page.locator('button.toggle-complete')).toBeDisabled()
 );
 
 test.describe('textarea', () => {
