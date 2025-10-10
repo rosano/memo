@@ -11,13 +11,23 @@ export default {
       required: ['description'],
     });
 
+    const trim = (object) => {
+      Object.keys(object).forEach(e => {
+        if (!object[e]) {
+          delete object[e];
+        }
+      })
+      
+      return object;
+    };
+
     const dehydrate = (object) => {
       delete object.$id;
 
-      return Object.assign(object, {
+      return trim(Object.assign(object, {
         description: object.description.trim(),
         dateCreated: object.dateCreated ? object.dateCreated.toJSON() : undefined,
-      });
+      }));
     };
 
     const hydrate = (path, object) => {
