@@ -39,7 +39,6 @@ const mod = {
 	remove: (item) => { mod.data(mod._data.filter(e => e.$id !== item.$id)) },
 	
 	// modify: (item) => { remoteStorage.todos.updateTodo(item.$id, Object.assign(item, { description: Math.random().toString() })) },
-	// discard: (item) => { remoteStorage.todos.removeTodo(item.$id) },
 
 	update: (item) => { mod.data(mod._data.map(e => e.$id === item.$id ? item : e)) },
 

@@ -5,13 +5,13 @@ export default {
       type: 'object',
       properties: {
         description: { type: 'string' },
-        completed: { type: 'boolean' },
         dateCreated: { type: 'string' },
+        completed: { type: 'boolean' },
       },
       required: ['description'],
     });
 
-    const dehydrate = function (object) {
+    const dehydrate = (object) => {
       delete object.$id;
 
       return Object.assign(object, {
@@ -20,7 +20,7 @@ export default {
       });
     };
 
-    const hydrate = function (path, object) {
+    const hydrate = (path, object) => {
       object.completed = !!object.completed;
 
       return Object.assign(object, {
