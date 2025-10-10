@@ -17,7 +17,7 @@
 		"@sveltejs/kit": "^2.22.0",
 		"remotestorage-widget": "rosano/remotestorage-widget",
 		"remotestoragejs": "^2.0.0-beta.8",
-		"svelte-codemirror-editor": "rosano/svelte-codemirror-editor#patch-5",
+		"svelte-codemirror-editor": "^2.1.0",
 		"svp": "rosano/svp"
 	}
 }

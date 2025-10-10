@@ -69,10 +69,9 @@ const mod = {
 
 	// react
 
-	keydown (event) {
-		if (!mod.descriptionEmpty() && event.key === 'Enter' && (event.altKey || event.ctrlKey || event.metaKey)) {
+	Enter (event) {
+		if (!mod.descriptionEmpty()) {
 			mod.submit();
-			event.preventDefault();
 
 			// Return true to indicate the event was handled
 			return true;
@@ -165,7 +164,7 @@ onMount(() => {
 </article>
 
 <footer>
-	<CodeMirror bind:value={ mod._description } lang={ markdown() } lineNumbers={ false } highlight={ {activeLine: false,} } placeholder="what are you thinking?" extensions={ [EditorView.domEventHandlers({ keydown: mod.keydown })] } onready={ e => (mod._textarea = e).focus() } />
+	<CodeMirror bind:value={ mod._description } lang={ markdown() } lineNumbers={ false } highlight={ {activeLine: false,} } placeholder="what are you thinking?" keybindings={ ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({key, run: mod.Enter })) } onready={ e => (mod._textarea = e).focus() } />
 	<button class="jot-add" onclick={ mod.submit } disabled={ mod.descriptionEmpty() ? true : null }>jot</button>
 </footer>
 
