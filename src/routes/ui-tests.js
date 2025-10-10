@@ -18,7 +18,7 @@ test('h1', ({ page }) =>
 );
 
 test('description', ({ page }) =>
-  expect(page.locator('p:first-of-type')).toHaveText('Capture thoughts and sync to multiple devices with remoteStorage.')
+  expect(page.locator('p:first-of-type')).toHaveText('Capture thoughts and sync to multiple devices with remoteStorage.js.')
 );
 
 test('open-source', ({ page }) =>
