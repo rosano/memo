@@ -16,7 +16,7 @@ export default {
 
       return Object.assign(object, {
         description: object.description.trim(),
-        dateCreated: object.dateCreated.toJSON(),
+        dateCreated: object.dateCreated ? object.dateCreated.toJSON() : undefined,
       });
     };
 
