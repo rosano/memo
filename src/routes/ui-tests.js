@@ -22,5 +22,5 @@ test('description', ({ page }) =>
 );
 
 test('open-source', ({ page }) =>
-  expect(page.locator('p:nth-of-type(2)')).toHaveText('open-source')
+  expect(page.locator('p:nth-of-type(2)')).toHaveText('open-source and interoperable with other apps.')
 );
