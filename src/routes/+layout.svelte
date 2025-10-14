@@ -14,6 +14,9 @@ let { children, data } = $props();
 	{#if dev }
 		<!-- https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests -->
 		<link rel="icon" href="data:;base64,=">
+	{:else}
+		<link rel="icon" href="https://static.rosano.ca/memo/touch.png" type="image/png">
+		<link rel="apple-touch-icon" href="https://static.rosano.ca/memo/touch.png" />
 	{/if}
 </svelte:head>
 

@@ -7,8 +7,8 @@ export async function GET() {
 	  background_color: 'white',
 	  theme_color: 'white',
 	  icons: [{
-      src: 'https://static.rosano.ca/rcreativ/touch.png',
-      sizes: '600x600',
+      src: 'https://static.rosano.ca/memo/touch.png',
+      sizes: '1000x1000',
       type: 'image/png',
       purpose: 'any maskable'
     }],
