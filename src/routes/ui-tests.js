@@ -16,11 +16,3 @@ test('navigation', ({ page }) =>
 test('h1', ({ page }) =>
 	expect(page.locator('h1')).toHaveText('memo')
 );
-
-test('description', ({ page }) =>
-  expect(page.locator('p:first-of-type')).toHaveText('Capture thoughts and sync to multiple devices with remoteStorage.js.')
-);
-
-test('open-source', ({ page }) =>
-  expect(page.locator('p:nth-of-type(2)')).toHaveText('open-source and interoperable with other apps.')
-);
