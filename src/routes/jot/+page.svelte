@@ -164,8 +164,8 @@ onMount(() => {
 </article>
 
 <footer>
-	<CodeMirror bind:value={ mod._description } lang={ markdown() } lineNumbers={ false } highlight={ {activeLine: false,} } placeholder="what are you thinking?" keybindings={ ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({key, run: mod.Enter })) } onready={ e => {  mod._textarea = e; setTimeout(() => mod._textarea.focus(), 200) } } />
 	<button class="jot-add" onclick={ mod.submit } disabled={ mod.descriptionEmpty() ? true : null }>jot</button>
+	<CodeMirror bind:value={ mod._description } lang={ markdown() } lineNumbers={ false } highlight={ {activeLine: false,} } placeholder="what are you thinking?" keybindings={ ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({key, run: mod.Enter })) } onready={ e => {  mod._textarea = e; setTimeout(() => mod._textarea.focus(), 300) } } />
 </footer>
 
 </app>
