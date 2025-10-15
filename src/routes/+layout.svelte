@@ -46,7 +46,7 @@ let { children, data } = $props();
 <style>
 :root {
 	--spacing: 10px;
-	--cap: 600px;
+	--cap: 500px;
 	--background: #eee;
 	--foreground: #f9f9f9;
 	--corner: 3px;

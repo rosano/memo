@@ -205,12 +205,11 @@ onMount(() => {
 </app>
 
 <style>
-:root {
-	--border: 1px solid #eee;
-}
-
 :global {
 	layout.jot, layout.jot children {
+		--border: 1px solid #eee;
+		--cap: 600px;
+
 		display: flex !important;
 		height: 100dvh;
 
