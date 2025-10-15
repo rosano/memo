@@ -31,7 +31,7 @@ let { children, data } = $props();
 </header>
 
 <children>{@render children?.()}</children>
-	
+
 <Toast></Toast>
 
 </layout>
