@@ -18,6 +18,13 @@ let { children, data } = $props();
 		<link rel="icon" href="https://static.rosano.ca/memo/touch.png" type="image/png">
 		<link rel="apple-touch-icon" href="https://static.rosano.ca/memo/touch.png" />
 	{/if}
+
+	{#if !dev }
+		<script src="https://pkg.rosano.ca/gazette/master/main.js"></script>
+		<script src="https://pkg.rosano.ca/feedbox/master/main.js"></script>
+		<script src="https://olsk.rosano.ca/OLSKBanner/master/main.js"></script>
+		<script defer src="https://olsk.rosano.ca/OLSKFigures/master/main.js"></script>
+	{/if}
 </svelte:head>
 
 <layout>
@@ -64,6 +71,20 @@ let { children, data } = $props();
 			border-radius: var(--corner);
 
 			background: var(--foreground);
+
+			hr {
+				border-width: 0.5px;
+			}
+
+			ul {
+				padding-left: calc(var(--spacing) * 2);
+			}
+		}
+
+		a.root-link {
+			display: flex;
+			margin: var(--spacing) 0;
+			justify-content: center;
 		}
 	}
 }
