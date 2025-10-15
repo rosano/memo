@@ -185,6 +185,10 @@ onMount(() => {
 		app {
 			flex-grow: 1;
 
+			#remotestorage-widget {
+				position: relative;
+			}
+
 			.cm-gutters {
 			  display: none !important;
 			}
