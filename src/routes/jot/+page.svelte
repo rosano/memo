@@ -81,6 +81,16 @@ const mod = {
 		return false;
 	},
 
+	touchhandle (event, callback) {
+		event.preventDefault();
+
+		callback();
+	},
+
+	touchignore (event) {
+		event.preventDefault();
+	},
+
 	// lifecycle
 
 	visibilitychange (event) {
@@ -133,17 +143,35 @@ onMount(() => {
 <div id="widget-wrapper"></div>
 
 <toolbar>
-	<button class="copy-text" onclick={ mod.copyText } disabled={ !mod._groups.length ? true : null }>
+	<button class="copy-text" disabled={ !mod._groups.length ? true : null }
+		onmouseup={ mod.touchignore }
+		onmousedown={ mod.touchignore }
+		ontouchstart={ mod.touchignore }
+		ontouchend={ (e) => mod.touchignore }
+		onclick={ (e) => mod.touchhandle(e, mod.copyText) }
+		>
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{copyIcon}" aria-hidden="true">
 		<span>copy text</span>
 	</button>
-	<button class="mark-done" onclick={ mod.markDone } disabled={ !mod._groups.length ? true : null }>
+	<button class="mark-done" disabled={ !mod._groups.length ? true : null }
+		onmouseup={ mod.touchignore }
+		onmousedown={ mod.touchignore }
+		ontouchstart={ mod.touchignore }
+		ontouchend={ (e) => mod.touchignore }
+		onclick={ (e) => mod.touchhandle(e, mod.markDone) }
+		>
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{completeIcon}" aria-hidden="true">
 		<span>mark done</span>
 	</button>
-	<button class="discard-completed" onclick={ mod.discardCompleted } disabled={ !mod._completed.length ? true : null }>
+	<button class="discard-completed" disabled={ !mod._completed.length ? true : null }
+		onmouseup={ mod.touchignore }
+		onmousedown={ mod.touchignore }
+		ontouchstart={ mod.touchignore }
+		ontouchend={ (e) => mod.touchignore }
+		onclick={ (e) => mod.touchhandle(e, mod.discardCompleted) }
+		>
 		<!-- svelte-ignore a11y_missing_attribute -->
 		<img src="{discardIcon}" aria-hidden="true">
 		<span>discard</span>
@@ -164,8 +192,14 @@ onMount(() => {
 </article>
 
 <footer>
-	<button class="jot-add" onclick={ mod.submit } disabled={ mod.descriptionEmpty() ? true : null }>jot</button>
 	<CodeMirror bind:value={ mod._description } lang={ markdown() } lineNumbers={ false } highlight={ {activeLine: false,} } placeholder="what are you thinking?" keybindings={ ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({key, run: mod.Enter })) } onready={ e => {  mod._textarea = e; setTimeout(() => mod._textarea.focus(), 300) } } />
+	<button class="jot-add" disabled={ mod.descriptionEmpty() ? true : null }
+		onmouseup={ mod.touchignore }
+		onmousedown={ mod.touchignore }
+		ontouchstart={ mod.touchignore }
+		ontouchend={ (e) => mod.touchignore }
+		onclick={ (e) => mod.touchhandle(e, mod.submit) }
+		>jot</button>
 </footer>
 
 </app>

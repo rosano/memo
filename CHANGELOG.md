@@ -16,3 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mark all as done
 - Delete completed items
 - New line continues list
+- Maintain textarea focus after button pushes
