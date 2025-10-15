@@ -2,7 +2,7 @@
 import { onMount } from 'svelte';
 import { dev } from '$app/environment';
 
-let gazetteContainer, feedboxContainer;
+let gazetteContainer, feedboxContainer, bannerContainer;
 
 onMount(() => {
 	if (dev) {
@@ -11,6 +11,10 @@ onMount(() => {
 
   gazetteContainer = window.gazette.loadElement(gazetteContainer);
   feedboxContainer = window.feedbox._loadROCO(feedboxContainer);
+  
+  (async function() {
+  	window.OLSKBanner._configureElement(bannerContainer, await window.OLSKBanner.OLSKBannerInfoObject())
+  })();
 });
 </script>
 
@@ -39,3 +43,5 @@ a notepad you can't edit.
 <a class="root-link" href="https://rosano.ca" title="Visit rosano.ca">
 	<img role="presentation" src="https://static.rosano.ca/rcreativ/identity.svg">
 </a>
+
+<div bind:this={ bannerContainer }></div>
