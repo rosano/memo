@@ -210,7 +210,7 @@ onMount(() => {
 }
 
 :global {
-	layout {
+	layout.jot, layout.jot children {
 		display: flex !important;
 		height: 100dvh;
 

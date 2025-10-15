@@ -27,7 +27,7 @@ let { children, data } = $props();
 	{/if}
 </svelte:head>
 
-<layout>
+<layout class={ page.route.id.split('/').pop() }>
 
 <header>
 	<nav>
