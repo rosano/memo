@@ -18,7 +18,10 @@ const config = {
 		},
 	},
 	preprocess: [mdsvex({
-		extensions: ['.sv.md']
+		extensions: ['.sv.md'],
+		smartypants: {
+			quotes: false,
+		},
 	})],
 	extensions: ['.svelte', '.sv.md'],
 };
