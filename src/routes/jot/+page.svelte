@@ -200,6 +200,11 @@ onMount(() => {
 			.cm-content {
 				height: 100px;
 			}
+
+			.cm-cursor {
+				border-color: #0f80ff !important;
+				border-width: 1.5px !important;
+			}
 		}
 	}
 }
