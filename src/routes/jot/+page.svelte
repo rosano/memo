@@ -250,6 +250,9 @@ app {
 	button {
 		cursor: pointer;
 
+		/* unset mobile safari default color */
+		color: inherit;
+
 		/* OLSKMobileSafariRemoveDefaultInputStyle */
 		-webkit-appearance: none;
 		-moz-appearance: none;
