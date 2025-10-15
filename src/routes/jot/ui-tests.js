@@ -49,7 +49,7 @@ test('button.discard-completed', async ({ page }) => {
 });
 
 test.skip('article placeholder', async ({ page }) => {
-	expect(page.locator('article placeholder')).toHaveText('↓ enter some text from the box below to get started ↓')
+	expect(page.locator('article placeholder')).toHaveText('enter some text from the box below to get started↓↓↓')
 
 	await fillCodemirror(page, Math.random().toString());
   await page.locator('button.jot-add').click();

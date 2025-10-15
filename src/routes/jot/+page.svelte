@@ -180,7 +180,7 @@ onMount(() => {
 
 <article>
 	{#if !mod._groups.length }
-		<placeholder>↓ enter some text from the box below to get started ↓</placeholder>
+		<placeholder>enter some text from the box below to get started<br>↓↓↓</placeholder>
 	{/if}
 	{#each mod._groups as group }
 		<h1>{ group.name }</h1>
@@ -314,6 +314,7 @@ app {
 			justify-content: center;
 			align-items: center;
 			height: 100%;
+			text-align: center;
 		}
 	}
 
