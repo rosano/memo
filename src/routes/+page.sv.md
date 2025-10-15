@@ -31,10 +31,15 @@ a notepad you can't edit.
 - always ready to type (supports the [work digress cycle](https://rosano.ca/blog/work-then-dont/))
 - no managing conflict
 - works offline
-- [interoperable](https://todos-interop.0data.app) with [Listable](https://listable.5apps.com) and [TodoMVC](https://todomvc.0data.app)
 - [open-source](https://github.com/rosano/memo)
+- [interoperable](https://todos-interop.0data.app) with [Listable](https://listable.5apps.com) and [TodoMVC](https://todomvc.0data.app)
 
+<figure>
 
+![](https://static.rosano.ca/home/blog/2025-10-15-introducing-memo/output.gif)
+
+<figcaption>interoperable with other apps</figcaption>
+</figure>
 
 </article>
 

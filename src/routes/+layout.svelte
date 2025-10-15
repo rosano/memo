@@ -79,6 +79,20 @@ let { children, data } = $props();
 			ul {
 				padding-left: calc(var(--spacing) * 2);
 			}
+
+			figure {
+
+				img {
+					max-width: 100%;
+				}
+
+				text-align: center;
+			}
+
+			figcaption {
+				font-size: 90%;
+				opacity: 0.5;
+			}
 		}
 
 		a.root-link {
