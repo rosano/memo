@@ -12,7 +12,7 @@ onMount(() => {
   gazetteContainer = window.gazette.loadElement(gazetteContainer);
   feedboxContainer = window.feedbox._loadROCO(feedboxContainer);
 });
-	</script>
+</script>
 
 <article>
 
