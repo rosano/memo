@@ -180,7 +180,7 @@ onMount(() => {
 
 <article>
 	{#if !mod._groups.length }
-		<placeholder>&nbsp;</placeholder>
+		<placeholder>↓ enter some text from the box below to get started ↓</placeholder>
 	{/if}
 	{#each mod._groups as group }
 		<h1>{ group.name }</h1>
@@ -307,6 +307,14 @@ app {
 
 		@media (max-width: 450px) {
 			border-radius: 0;
+		}
+
+		placeholder {
+			opacity: 0.5;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
 		}
 	}
 
