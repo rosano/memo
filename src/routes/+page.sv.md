@@ -34,11 +34,13 @@ a notepad you can't edit.
 - [interoperable](https://todos-interop.0data.app) with [Listable](https://listable.5apps.com) and [TodoMVC](https://todomvc.0data.app)
 - [open-source](https://github.com/rosano/memo)
 
+
+
+</article>
+
 <div bind:this={ gazetteContainer }></div>
 
 <div bind:this={ feedboxContainer }></div>
-
-</article>
 
 <a class="root-link" href="https://rosano.ca" title="Visit rosano.ca">
 	<img role="presentation" src="https://static.rosano.ca/rcreativ/identity.svg">
