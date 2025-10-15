@@ -192,7 +192,7 @@ onMount(() => {
 </article>
 
 <footer>
-	<CodeMirror bind:value={ mod._description } lang={ markdown() } lineNumbers={ false } highlight={ {activeLine: false,} } placeholder="what are you thinking?" keybindings={ ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({key, run: mod.Enter })) } onready={ e => {  mod._textarea = e; setTimeout(() => mod._textarea.focus(), 300) } } />
+	<CodeMirror bind:value={ mod._description } lang={ markdown() } lineNumbers={ false } highlight={ {activeLine: false,} } placeholder="what are you thinking?" keybindings={ ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({key, run: mod.Enter })) } onready={ e => {  mod._textarea = e; setTimeout(() => mod._textarea.focus(), 300) } } lineWrapping={ true } />
 	<button class="jot-add" disabled={ mod.descriptionEmpty() ? true : null }
 		onmouseup={ mod.touchignore }
 		onmousedown={ mod.touchignore }
