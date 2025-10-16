@@ -22,7 +22,7 @@ let { children, data } = $props();
 	{#if !dev }
 		<script src="https://pkg.rosano.ca/gazette/master/main.js"></script>
 		<script src="https://pkg.rosano.ca/feedbox/master/main.js"></script>
-		<script src="https://olsk.rosano.ca/OLSKBanner/master/main.js"></script>
+		<script src="https://olsk.rosano.ca/OLSKBanner/master/main.js" data-banner-manual></script>
 		<script defer src="https://olsk.rosano.ca/OLSKFigures/master/main.js"></script>
 	{/if}
 </svelte:head>
