@@ -29,7 +29,7 @@ a notepad you can't edit.
 ## features
 
 - always ready to type (supports the [work digress cycle](https://rosano.ca/blog/work-then-dont/))
-- no managing conflict
+- no managing conflict between devices
 - works offline
 - [open-source](https://github.com/rosano/memo)
 - [interoperable](https://todos-interop.0data.app) with [Listable](https://listable.5apps.com) and [TodoMVC](https://todomvc.0data.app)
