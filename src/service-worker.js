@@ -71,6 +71,11 @@ const mod = {
 		].filter(e => event.request.url.match(e)).length)
 			return;
 
+		// storage account requests shouldn't be cached
+		// not sure of the best way, but this is a guess
+		if (event.request.mode === 'cors')
+			return;
+
 		event.respondWith(mod.respond(event));
 	},
 
