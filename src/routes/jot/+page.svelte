@@ -9,7 +9,6 @@ import discardIcon from './discard.svg';
 
 import CodeMirror from "svelte-codemirror-editor";
 import { markdown } from "@codemirror/lang-markdown";
-import { EditorView } from "@codemirror/view";
 
 // remoteStorage module
 const remoteStorage = new RemoteStorage({
@@ -43,6 +42,38 @@ const mod = {
 	update: (item) => { mod.data(mod._data.map(e => e.$id === item.$id ? item : e)) },
 
 	// interface
+	_Codemirror: {
+		lang: markdown(),
+		lineNumbers: false,
+		highlight: {
+			activeLine: false,
+		},
+		placeholder: 'what are you thinking?',
+		keybindings: ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({
+			key,
+			Enter (event) {
+				if (!mod.descriptionEmpty()) {
+					mod.submit();
+
+					// Return true to indicate the event was handled
+					return true;
+				}
+
+				// Return false to allow default handling
+				return false;
+			},
+		})),
+		onready: e => {
+			mod._textarea = e;
+
+			setTimeout(() => mod._textarea.focus(), 300); 
+		},
+		onchange (e) {
+			mod._description = e;
+		},
+		nodebounce: true,
+		lineWrapping: true,
+	},
 
 	submit: async () => {
 		await remoteStorage.todos.addTodo({
@@ -50,6 +81,7 @@ const mod = {
 		});
 
 		mod._description = '';
+		mod._Codemirror.value = '';
 
 		mod._textarea.focus();
 	},
@@ -73,18 +105,6 @@ const mod = {
 	discardCompleted: () => mod._completed.forEach(e => remoteStorage.todos.removeTodo(e.$id)),
 
 	// react
-
-	Enter (event) {
-		if (!mod.descriptionEmpty()) {
-			mod.submit();
-
-			// Return true to indicate the event was handled
-			return true;
-		}
-
-		// Return false to allow default handling
-		return false;
-	},
 
 	touchhandle (event, callback) {
 		event.preventDefault();
@@ -199,16 +219,7 @@ import Feedback from '$lib/Feedback.svelte';
 </article>
 
 <footer>
-	<CodeMirror
-		bind:value={ mod._description } 
-		lang={ markdown() } 
-		lineNumbers={ false } 
-		highlight={ {activeLine: false,} } 
-		placeholder="what are you thinking?" 
-		keybindings={ ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({key, run: mod.Enter })) } 
-		onready={ e => { mod._textarea = e; setTimeout(() => mod._textarea.focus(), 300) } }
-		nodebounce={ true }
-		lineWrapping={ true } />
+	<CodeMirror {...mod._Codemirror} />
 	<button class="jot-add" disabled={ mod.descriptionEmpty() ? true : null }
 		onmouseup={ mod.touchignore }
 		onmousedown={ mod.touchignore }
