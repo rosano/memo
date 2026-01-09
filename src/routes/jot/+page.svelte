@@ -40,6 +40,7 @@ const mod = {
 
 	// interface
 	_Codemirror: {
+		value: '',
 		lang: markdown(),
 		lineNumbers: false,
 		highlight: {
@@ -66,7 +67,7 @@ const mod = {
 			setTimeout(() => mod._textarea.focus(), 300); 
 		},
 		onchange (e) {
-			mod._value = e;
+			mod._Codemirror.value = mod._value = e;
 		},
 		nodebounce: true,
 		lineWrapping: true,
@@ -79,8 +80,7 @@ const mod = {
 			description: mod._value,
 		});
 
-		mod._value = '';
-		mod._Codemirror.value = '';
+		mod._Codemirror.value = mod._value = '';
 
 		mod._textarea.focus();
 	},
