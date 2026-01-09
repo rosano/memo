@@ -207,6 +207,7 @@ import Feedback from '$lib/Feedback.svelte';
 		placeholder="what are you thinking?" 
 		keybindings={ ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({key, run: mod.Enter })) } 
 		onready={ e => { mod._textarea = e; setTimeout(() => mod._textarea.focus(), 300) } }
+		nodebounce={ true }
 		lineWrapping={ true } />
 	<button class="jot-add" disabled={ mod.descriptionEmpty() ? true : null }
 		onmouseup={ mod.touchignore }
