@@ -145,9 +145,7 @@ remoteStorage.todos.handle('change', (event) => {
   }
 });
 
-
 import { onMount } from 'svelte';
-
 onMount(() => {
   (new Widget(remoteStorage)).attach('widget-wrapper');
 });
