@@ -23,65 +23,57 @@ const ASSETS = [
 
 const mod = {
 	
-	// precache project assets
-	install: async () => (await caches.open(CACHE)).addAll(ASSETS),
+	precache: async () => (await caches.open(CACHE)).addAll(ASSETS),
 	
-	// clear old cache
-	activate: async () => await Promise.all(Object.keys(await caches.keys()).filter(e => e !== CACHE).map(caches.delete)),
+	deleteCache: async () => Promise.all((await caches.keys()).filter(e => e !== CACHE).map(caches.delete)),
 
 	async respond (event) {
 		const url = new URL(event.request.url);
 		const cache = await caches.open(CACHE);
+		let response;
 
-		// `build`/`files` can always be served from the cache
-		if (ASSETS.includes(url.pathname)) {
-			const response = await cache.match(url.pathname);
-
-			if (response) {
-				return response;
-			}
-		}
+		// always serve `build` and `files` from cache
+		if (ASSETS.includes(url.pathname) && (response = await cache.match(url.pathname)))
+			return response;
 
 		// try network first, and fall back to cache if offline
 		// (but if our whole app makes no requests this will probably never happen)
 		try {
-			const response = await fetch(event.request);
+			response = await fetch(event.request);
 
 			// sometimes fetch doesn't return a `Response`
-			if (!(response instanceof Response)) {
+			if (!(response instanceof Response))
 				throw new Error('invalid response from fetch');
-			}
 
-			if (response.status === 200) {
+			if (response.status === 200)
 				cache.put(event.request, response.clone());
-			}
 
 			return response;
 		} catch (err) {
-			const response = await cache.match(event.request);
-
-			if (response) {
+			if (response = await cache.match(event.request))
 				return response;
-			}
 
 			// nothing more can do to respond to this request
 			throw err;
 		}
 	},
 
-	fetch (event) {
+	didInstall: event => event.waitUntil(mod.precache()),
+
+	didActivate: event => event.waitUntil(mod.deleteCache()),
+
+	didFetch: event => {
 		// ignore POST requests, etc…
-		if (event.request.method !== 'GET'){
+		if (event.request.method !== 'GET')
 			return;
-		}
 
 		event.respondWith(mod.respond(event));
 	},
 
 };
 
-self.addEventListener('install', (event) => event.waitUntil(mod.install()));
+self.addEventListener('install', mod.didInstall);
 
-self.addEventListener('activate', (event) => event.waitUntil(mod.activate()));
+self.addEventListener('activate', mod.didActivate);
 
-self.addEventListener('fetch', mod.fetch);
+self.addEventListener('fetch', mod.didFetch);
