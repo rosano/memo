@@ -52,3 +52,10 @@ a notepad you can't edit.
 </a>
 
 <div bind:this={ bannerContainer }></div>
+
+<style>
+:global(.home > *) {
+	display: block;
+	padding: 0 10px;
+}
+</style>
