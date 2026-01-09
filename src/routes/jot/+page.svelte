@@ -22,9 +22,6 @@ remoteStorage.todos.cacheTodos();
 
 const mod = {
 
-	_description: '',
-	descriptionEmpty: () => mod._description.trim() === '',
-
 	_data: [],
 	_groups: [],
 	_completed: [],
@@ -52,7 +49,7 @@ const mod = {
 		keybindings: ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({
 			key,
 			Enter (event) {
-				if (!mod.descriptionEmpty()) {
+				if (!mod.isEmpty()) {
 					mod.submit();
 
 					// Return true to indicate the event was handled
@@ -69,18 +66,20 @@ const mod = {
 			setTimeout(() => mod._textarea.focus(), 300); 
 		},
 		onchange (e) {
-			mod._description = e;
+			mod._value = e;
 		},
 		nodebounce: true,
 		lineWrapping: true,
 	},
+	_value: '',
+	isEmpty: () => mod._value.trim() === '',
 
 	submit: async () => {
 		await remoteStorage.todos.addTodo({
-			description: mod._description,
+			description: mod._value,
 		});
 
-		mod._description = '';
+		mod._value = '';
 		mod._Codemirror.value = '';
 
 		mod._textarea.focus();
@@ -220,7 +219,7 @@ import Feedback from '$lib/Feedback.svelte';
 
 <footer>
 	<CodeMirror {...mod._Codemirror} />
-	<button class="jot-add" disabled={ mod.descriptionEmpty() ? true : null }
+	<button class="jot-add" disabled={ mod.isEmpty() ? true : null }
 		onmouseup={ mod.touchignore }
 		onmousedown={ mod.touchignore }
 		ontouchstart={ mod.touchignore }
