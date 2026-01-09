@@ -30,29 +30,38 @@ const mod = {
 mod.moduleDidLoad();
 </script>
 
+<container>
 {#if visible}
 	<feedback in:fly={ { y: -10 } } out:fade>{ text }</feedback>
 {/if}
+</container>
 
 <style type="text/css">
-feedback {
+container {
 	--spacing: 10px;
 	--corner: 3px;
 
-	display: block;
+	width: 100%;
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	text-align: center;
+	
+	z-index: 2;
+}
+feedback {
+	display: inline-block;
 	padding: calc(var(--spacing) / 2);
 	border: 1px solid #666666;
 	border-radius: var(--corner);
-	
-	position: fixed;
-	margin: var(--spacing);
-	left: 50%;
-	top: 30px;
+
+	margin: calc(var(--spacing) * 2);
 	
 	background: #333333;
 	color: white;
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 
-	z-index: 2;
 }
 </style>
