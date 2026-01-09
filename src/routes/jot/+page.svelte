@@ -54,7 +54,12 @@ const mod = {
 		mod._textarea.focus();
 	},
 
-	copyText: () => navigator.clipboard ? navigator.clipboard.writeText(logic.groupsPlaintext(mod._groups)) : null,
+	_Feedback: {
+		onhide: () => mod._Feedback.text = '',
+	},
+	copyText: () => !navigator.clipboard || navigator.clipboard.writeText(logic.groupsPlaintext(mod._groups))
+		  .then(() => mod._Feedback.text = 'Copied to clipboard')
+		  .catch((err) => mod._Feedback.text = ['failed to copy:', err].join(' ')),
 
 	markDone: () => Promise.all(
 		mod._data.map(e => remoteStorage.todos.updateTodo(
@@ -127,6 +132,8 @@ import { onMount } from 'svelte';
 onMount(() => {
   (new Widget(remoteStorage)).attach('widget-wrapper');
 });
+
+import Feedback from '$lib/Feedback.svelte';
 </script>
 
 <svelte:document onvisibilitychange={ mod.visibilitychange } />
@@ -202,6 +209,10 @@ onMount(() => {
 		>jot</button>
 </footer>
 
+{#if mod._Feedback.text }
+	<Feedback {... mod._Feedback } />
+{/if}
+
 </app>
 
 <style>
@@ -220,6 +231,7 @@ onMount(() => {
 
 			#remotestorage-widget {
 				position: relative;
+				z-index: 1;
 			}
 
 			.cm-gutters {
