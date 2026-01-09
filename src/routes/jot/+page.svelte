@@ -62,9 +62,9 @@ const mod = {
 			},
 		})),
 		onready: e => {
-			mod._textarea = e;
+			mod._EditorView = e;
 
-			setTimeout(() => mod._textarea.focus(), 300); 
+			setTimeout(() => mod._EditorView.focus(), 300); 
 		},
 		onchange (e) {
 			mod._Codemirror.value = mod._value = e;
@@ -82,7 +82,7 @@ const mod = {
 
 		mod._Codemirror.value = mod._value = '';
 
-		mod._textarea.focus();
+		mod._EditorView.focus();
 	},
 
 	_Feedback: {
@@ -118,8 +118,8 @@ const mod = {
 	// lifecycle
 
 	visibilitychange (event) {
-		if (event.target.visibilityState === 'visible' && mod._textarea) {
-			setTimeout(() => mod._textarea.focus(), 200);
+		if (event.target.visibilityState === 'visible' && mod._EditorView) {
+			setTimeout(() => mod._EditorView.focus(), 200);
 		}
 	},
 
