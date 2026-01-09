@@ -277,7 +277,7 @@ import Feedback from '$lib/Feedback.svelte';
 			}
 
 			.cm-content {
-				height: 100px;
+				min-height: 100px;
 			}
 
 			.cm-cursor {
