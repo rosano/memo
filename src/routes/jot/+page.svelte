@@ -9,6 +9,15 @@ import discardIcon from './discard.svg';
 
 import CodeMirror from "svelte-codemirror-editor";
 import { markdown } from "@codemirror/lang-markdown";
+// import { EditorView } from "codemirror"
+// import { StateEffect } from '@codemirror/state';
+
+// const focusExtension = EditorView.focusChangeEffect.of((_, hasFocus) => {
+//   if (hasFocus)
+//   	mod.offerPaste();
+
+//   return StateEffect.define(undefined).of(undefined);
+// });
 
 // remoteStorage module
 const remoteStorage = new RemoteStorage({
@@ -42,6 +51,7 @@ const mod = {
 	_Codemirror: {
 		value: '',
 		lang: markdown(),
+		// extensions: [focusExtension],
 		lineNumbers: false,
 		highlight: {
 			activeLine: false,
@@ -84,6 +94,13 @@ const mod = {
 
 		mod._EditorView.focus();
 	},
+	// async offerPaste () {
+	// 	if (!navigator.clipboard)
+	// 		return;
+		
+	// 	const text = await navigator.clipboard.readText();
+	// 	mod._Codemirror.value = mod._value = text;
+	// },
 
 	_Feedback: {
 		onhidden: () => mod._Feedback.text = '',
