@@ -71,7 +71,7 @@ describe('groupItems', () => {
 		}]);
 	});
 	
-	it('sorts newer dates lower', () => {
+	it('sorts by date descending', () => {
 		const items = [uItem({
 			dateCreated: new Date('2000-01-01'),
 		}), uItem()];
@@ -92,7 +92,7 @@ describe('groupItems', () => {
 		})];
 		expect(mod.groupItems(items)).toEqual([{
 			name: mod.heading(items[0].dateCreated),
-			items: items.slice().reverse(),
+			items,
 		}]);
 	});
 

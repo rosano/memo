@@ -37,7 +37,7 @@ const mod = {
 				items: []
 			};
 
-			group.items = group.items.concat(item).sort((a, b) => uAscending(a.dateCreated, b.dateCreated));
+			group.items = group.items.concat(item).sort((a, b) => uDescending(a.dateCreated, b.dateCreated));
 
 			return coll.filter(e => !filter(e)).concat(group).sort((a, b) => uDescending(a.name, b.name));
 		}, []);
