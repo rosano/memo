@@ -1,5 +1,5 @@
 <script>
-let { text = 'Hello', onhide = (function () {}) } = $props();
+let { text = 'Hello', onhidden = (function () {}) } = $props();
 import { fly, fade } from 'svelte/transition';
 let visible = $state(false);
 
@@ -16,7 +16,7 @@ const mod = {
 	hide () {
 		visible = false;
 
-		setTimeout(onhide, 1000);
+		setTimeout(onhidden, 1000);
 	},
 
 	// lifecycle

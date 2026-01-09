@@ -55,7 +55,7 @@ const mod = {
 	},
 
 	_Feedback: {
-		onhide: () => mod._Feedback.text = '',
+		onhidden: () => mod._Feedback.text = '',
 	},
 	copyText: () => !navigator.clipboard || navigator.clipboard.writeText(logic.groupsPlaintext(mod._groups))
 		  .then(() => mod._Feedback.text = 'Copied to clipboard')
