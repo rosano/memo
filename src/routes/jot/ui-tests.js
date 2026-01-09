@@ -149,7 +149,7 @@ test('mark-done', async ({ page, context }) => {
 	expect(page.locator('button.mark-done')).toHaveText('mark done');
 
 	await page.locator('button.mark-done').click();
-	await expect(page.locator('article p s')).toHaveText(items.map(e => mod.itemPlaintext(Object.assign(e, {
+	await expect(page.locator('article p s')).toHaveText(items.reverse().map(e => mod.itemPlaintext(Object.assign(e, {
 		completed: true,
 	}))));
 });
