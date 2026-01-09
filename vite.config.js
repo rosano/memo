@@ -20,6 +20,7 @@ export default defineConfig({
 	server: {
 		allowedHosts: [
 			'loc.sv',
+			'loc.mem',
 		],
 	},
 	// // https://github.com/touchifyapp/svelte-codemirror-editor
