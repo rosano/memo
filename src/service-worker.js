@@ -65,6 +65,12 @@ const mod = {
 		if (event.request.method !== 'GET')
 			return;
 
+		if ([
+			'service-worker.js',
+			'version.json',
+		].filter(e => event.request.url.match(e)).length)
+			return;
+
 		event.respondWith(mod.respond(event));
 	},
 
