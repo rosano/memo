@@ -36,10 +36,9 @@ const mod = {
 		if (ASSETS.includes(url.pathname) && (response = await cache.match(url.pathname)))
 			return response;
 
+		// try network first, and fall back to cache if offline
+		// (but if our whole app makes no requests this will probably never happen)
 		try {
-			if (response = await cache.match(event.request))
-				return response;
-
 			response = await fetch(event.request);
 
 			// sometimes fetch doesn't return a `Response`
@@ -51,6 +50,9 @@ const mod = {
 
 			return response;
 		} catch (err) {
+			if (response = await cache.match(event.request))
+				return response;
+
 			// nothing more can do to respond to this request
 			throw err;
 		}
