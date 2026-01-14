@@ -1,12 +1,12 @@
 <script>
 import { updated } from '$app/state';
 
-let _updateVisible = true;
+let isVisible = true;
 </script>
 
-{#if updated.current && _updateVisible}
+{#if updated.current && isVisible}
 	<toast>
-		<button class="close" onclick={ () => _updateVisible = false }>new update available</button>
+		<button class="close" onclick={ () => isVisible = false }>new update available</button>
 		<button onclick={ () => location.reload() }>Reload</button>
 	</toast>
 {/if}
