@@ -81,6 +81,27 @@ const mod = {
 		event.respondWith(mod.respond(event));
 	},
 
+	async message (event) {
+		const signature = event.data;
+
+		const api = {
+
+			skipWaiting: () => self.skipWaiting(),
+
+		};
+
+		if (!Object.keys(api).includes(signature))
+			return;
+
+		await api[signature]()
+
+		// return event.source.postMessage({
+		// 	signature,
+		// 	OLSKMessageArguments: event.data.OLSKMessageArguments,
+		// 	OLSKMessageResponse: await api[signature](...[].concat(event.data.OLSKMessageArguments || [])),
+		// });
+	},
+
 };
 
 self.addEventListener('install', mod.didInstall);
@@ -88,3 +109,5 @@ self.addEventListener('install', mod.didInstall);
 self.addEventListener('activate', mod.didActivate);
 
 self.addEventListener('fetch', mod.didFetch);
+
+self.addEventListener('message', mod.message);
