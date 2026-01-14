@@ -25,7 +25,7 @@ const mod = {
 	
 	precache: async () => (await caches.open(CACHE)).addAll(ASSETS),
 	
-	deleteCache: async () => Promise.all((await caches.keys()).filter(e => e !== CACHE).map(caches.delete)),
+	deleteCache: async () => Promise.all((await caches.keys()).filter(e => e !== CACHE).map(e => caches.delete(e))), // can't pass directly to map
 
 	async respond (event) {
 		const url = new URL(event.request.url);
