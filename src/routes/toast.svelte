@@ -83,6 +83,8 @@ toast {
 	color: white;
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 
+	z-index: 4;
+
 	display: flex;
 
 	button {
