@@ -22,6 +22,8 @@ const ASSETS = [
 ];
 
 const mod = {
+
+	debugOn: false,
 	
 	precache: async () => (await caches.open(CACHE)).addAll(ASSETS),
 	
@@ -73,10 +75,12 @@ const mod = {
 		].filter(e => event.request.url.match(e)).length)
 			return;
 
+		const url = new URL(event.request.url);
+		
 		// storage account requests shouldn't be cached
 		// not sure of the best way, but this is a guess
-		if (event.request.mode === 'cors')
-			return;
+		if (event.request.mode === 'cors' && !ASSETS.includes(url.pathname))
+			return mod.debugOn && console.log('skip cors', event.request.url);
 
 		event.respondWith(mod.respond(event));
 	},
