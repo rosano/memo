@@ -66,7 +66,7 @@ onMount(mod.didMount);
 	</toast>
 {/if}
 
-<style type="text/css">
+<style>
 toast {
 	--spacing: 10px;
 	--corner: 3px;
