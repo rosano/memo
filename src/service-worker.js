@@ -69,10 +69,7 @@ const mod = {
 		if (event.request.method !== 'GET')
 			return;
 
-		if ([
-			'service-worker.js',
-			'version.json',
-		].filter(e => event.request.url.match(e)).length)
+		if (event.request.url.match('service-worker.js'))
 			return;
 
 		const url = new URL(event.request.url);
