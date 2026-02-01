@@ -59,7 +59,8 @@ const mod = {
 		placeholder: 'what are you thinking?',
 		keybindings: ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({
 			key,
-			Enter (event) {
+			run: function Enter (event) {
+				console.log(event);
 				if (!mod.isEmpty()) {
 					mod.submit();
 
