@@ -44,7 +44,7 @@ const mod = {
 	},
 
 	groupsPlaintext (groups) {
-		return uFlatten(groups.map(e => [e.name, ...e.items.map(mod.itemPlaintext).reverse()])).join('\n\n');
+		return uFlatten(groups.map(e => [e.name, ...e.items.map(mod.itemPlaintext).reverse()]).reverse()).join('\n\n');
 	},
 
 };

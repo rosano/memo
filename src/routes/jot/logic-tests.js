@@ -105,10 +105,10 @@ describe('groupsPlaintext', () => {
 			dateCreated: new Date('2000-01-01'),
 		}), uItem()];
 		expect(mod.groupsPlaintext(mod.groupItems(items))).toEqual([
-			mod.heading(items[1].dateCreated),
-			mod.itemPlaintext(items[1]),
 			mod.heading(items[0].dateCreated),
 			mod.itemPlaintext(items[0]),
+			mod.heading(items[1].dateCreated),
+			mod.itemPlaintext(items[1]),
 		].join('\n\n'));
 	});
 
