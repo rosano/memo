@@ -60,7 +60,6 @@ const mod = {
 		keybindings: ['Mod-Enter', 'Control-Enter', 'Alt-Enter'].map(key => ({
 			key,
 			run: function Enter (event) {
-				console.log(event);
 				if (!mod.isEmpty()) {
 					mod.submit();
 
