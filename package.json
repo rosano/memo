@@ -15,7 +15,7 @@
 	"dependencies": {
 		"@codemirror/lang-markdown": "^6.4.0",
 		"@sveltejs/kit": "^2.22.0",
-		"remotestorage-widget": "rosano/remotestorage-widget",
+		"remotestorage-widget": "0dataapp/remotestorage-widget-self",
 		"remotestoragejs": "^2.0.0-beta.8",
 		"svelte-codemirror-editor": "^2.1.0",
 		"svp": "rosano/svp"
