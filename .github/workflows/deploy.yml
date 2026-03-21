@@ -1,10 +1,11 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
 on: [push]
 
 jobs:
   build_site:
     runs-on: ubuntu-latest
+    environment: deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,24 +41,12 @@ jobs:
       - name: Run Tests
         run: npm test
 
-      - name: Upload Artifacts
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'build/'
+      - name: Install surfer
+        run: npm -g install cloudron-surfer
 
-  deploy:
-    needs: build_site
-    runs-on: ubuntu-latest
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Upload
+        env:
+          SURFER_TOKEN: ${{ secrets.SURFER_TOKEN }}
+          SURFER_HOST: ${{ secrets.SURFER_HOST }}
+          SURFER_FOLDER: ${{ secrets.SURFER_FOLDER }}
+        run: surfer put --token "$SURFER_TOKEN" --server "$SURFER_HOST" build/* "$SURFER_FOLDER"
